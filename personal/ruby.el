@@ -33,3 +33,8 @@
                                  (local-set-key (kbd "RET") 'newline-and-indent)))
 ;;(add-hook 'ruby-mode-hook '(lambda ()
 ;;                             (local-set-key (kbd "RET") 'newline-and-indent)))
+
+(defun align-to-equals (begin end)
+  "Align region to equal signs"
+  (interactive "r")
+  (align-regexp begin end "\\(\\s-*\\)=" 1 1 ))

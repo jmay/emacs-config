@@ -4,8 +4,15 @@
 ;;
 ;; https://www.gnu.org/software/emacs/manual/html_node/org/Template-expansion.html
 ;; http://members.optusnet.com.au/~charles57/GTD/datetree.html
+;; https://www.gnu.org/software/emacs/manual/html_node/org/Conflicts.html
 
 (setq org-export-with-smart-quotes t)
+
+;; Make windmove work in org-mode:
+(add-hook 'org-shiftup-final-hook 'windmove-up)
+(add-hook 'org-shiftleft-final-hook 'windmove-left)
+(add-hook 'org-shiftdown-final-hook 'windmove-down)
+(add-hook 'org-shiftright-final-hook 'windmove-right)
 
 (setq org-default-notes-file "~/.deft/notes.org")
 
@@ -41,6 +48,10 @@
    deft-extension "org"
    deft-directory "~/.deft"
    deft-text-mode 'org-mode
-   deft-auto-save-interval 30.0
+   deft-auto-save-interval 0
   )
   (global-set-key (kbd "<f9>") 'deft))
+
+;; 130718 currently I don't like the deft auto-save because it triggers whitespace-cleanup
+;; couldn't turn it off once Deft has been loaded, needed to do this:
+;; (cancel-function-timers 'deft-auto-save)

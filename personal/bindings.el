@@ -29,3 +29,5 @@
 (global-set-key (kbd "H-<left>") 'backward-word)
 (global-set-key (kbd "H-<up>") 'previous-line)
 (global-set-key (kbd "H-<down>") 'next-line)
+
+(global-set-key (kbd "C-c =") 'align-to-equals)
