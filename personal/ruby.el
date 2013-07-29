@@ -16,9 +16,12 @@
   '(define-key ruby-mode-map (kbd "C-\\") 'comment-or-uncomment-region-or-line))
 
 ;; show fill column
-(add-hook 'ruby-mode-hook 'fci-mode)
+(add-hook 'prog-mode-hook 'fci-mode)
 ;; show line numbers
-(add-hook 'ruby-mode-hook 'linum-mode)
+(add-hook 'prog-mode-hook 'linum-mode)
+
+(setq linum-format "%4d ")
+
 
 
 ;; rubymotion
@@ -29,12 +32,24 @@
 
 
 ;; http://www.emacswiki.org/emacs/AutoIndentation
-(add-hook 'c-mode-common-hook '(lambda ()
-                                 (local-set-key (kbd "RET") 'newline-and-indent)))
-;;(add-hook 'ruby-mode-hook '(lambda ()
-;;                             (local-set-key (kbd "RET") 'newline-and-indent)))
+(add-hook 'prog-mode-hook '(lambda ()
+                             (local-set-key (kbd "RET") 'newline-and-indent)))
 
 (defun align-to-equals (begin end)
   "Align region to equal signs"
   (interactive "r")
   (align-regexp begin end "\\(\\s-*\\)=" 1 1 ))
+
+
+;; http://emacsredux.com/blog/2013/07/24/highlight-comment-annotations/
+;; TODO consider alternatives at http://www.emacswiki.org/emacs/FixmeMode
+
+(defun font-lock-comment-annotations ()
+  "Highlight a bunch of well known comment annotations.
+
+This functions should be added to the hooks of major modes for programming."
+  (font-lock-add-keywords
+   nil '(("\\<\\(FIX\\(ME\\)?\\|TODO\\|OPTIMIZE\\|HACK\\|REFACTOR\\)\b"
+          1 font-lock-warning-face t))))
+
+(add-hook 'prog-mode-hook 'font-lock-comment-annotations)

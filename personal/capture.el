@@ -27,12 +27,17 @@
          "Otherbase TODO"
          entry
          (file+headline "~/.deft/otherbase-todo.org" "Tasks")
-         "* TODO %?\n  %i\n  %a")
+         "* TODO %?\n  %i\n")
         ("t"
          "Veriphyr TODO"
          entry
          (file+headline "~/.deft/veriphyr-todo.org" "Tasks")
-         "* TODO %?\n  %i\n  %a")
+         "* TODO %?\n  %i\n")
+        ("e"
+         "Emacs TODO"
+         entry
+         (file+headline "~/.deft/emacs-todo.org" "Emacs TODO")
+         "* TODO %?\n  %i\n")
         ("j"
          "Journal"
          entry
@@ -55,3 +60,6 @@
 ;; 130718 currently I don't like the deft auto-save because it triggers whitespace-cleanup
 ;; couldn't turn it off once Deft has been loaded, needed to do this:
 ;; (cancel-function-timers 'deft-auto-save)
+
+;; http://www.emacswiki.org/emacs/AutoFillMode
+(add-hook 'text-mode-hook 'turn-on-auto-fill)

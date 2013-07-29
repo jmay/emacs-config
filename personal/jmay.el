@@ -3,7 +3,13 @@
 ;;; License:
 ;; This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.
 ;; URL: http://creativecommons.org/licenses/by-sa/3.0/deed.en_US
+;;
+;;; References:
+;; https://dl.dropboxusercontent.com/u/3968124/sacha-emacs.html
+;; http://doc.norang.ca/org-mode.html
+;; http://ftp.gnu.org/old-gnu/Manuals/elisp-manual-20-2.5/html_chapter/elisp_41.html
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Display theme
 
 (load-theme 'manoj-dark t)
@@ -21,16 +27,22 @@
 ;; (setq tags-table-list '("/Users/jmay/dev/TAGS"))
 
 ;; My packages
+
 (setq prelude-packages (append '(
                                  auto-complete
                                  dash-at-point
                                  motion-mode
                                  deft
                                  minimap
+                                 browse-kill-ring
                                  ) prelude-packages))
+
+;; http://www.emacswiki.org/emacs/BrowseKillRing
 
 ;; Install my packages
 (prelude-install-packages)
+
+(add-to-list 'package-archive-exclude-alist '(("melpa" org)))
 
 ;; my global key mappings
 
@@ -50,5 +62,8 @@
 ;; use markdown-mode for .txt files
 
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
+
+;; TODO additional packages to consider
+;; http://sachachua.com/blog/2011/12/emacs-artbollocks-mode-el-and-writing-more-clearly/
 
 ;;; jmay.el ends here
