@@ -134,6 +134,7 @@ By default most of the modules that ship with Prelude are not loaded.
 ;; (require 'prelude-scala)
 (require 'prelude-scheme)
 ;; (require 'prelude-scss)
+;; (require 'prelude-web)
 (require 'prelude-xml)
 ```
 
@@ -205,6 +206,7 @@ Keybinding         | Description
 <kbd>C-h A</kbd>   | Run `apropos` (search in all Emacs symbols).
 <kbd>M-/</kbd>     | Run `hippie-expand` (a replacement for the default `dabbrev-expand`).
 <kbd>C-x C-b</kbd> | Open `ibuffer` (a replacement for the default `buffer-list`).
+<kbd>F11</kbd>     | Make the window full screen.
 <kbd>F12</kbd>     | Toggle the Emacs menu bar.
 <kbd>C-x g</kbd>   | Open Magit's status buffer.
 <kbd>C-=</kbd>     | Run `expand-region` (incremental text selection).
@@ -216,6 +218,7 @@ Keybinding         | Description
 -------------------|------------------------------------------------------------
 <kbd>C-c o</kbd>   | Open the currently visited file with an external program.
 <kbd>C-c g</kbd>   | Search in Google for the thing under point (or an interactive query).
+<kbd>C-c y</kbd>   | Search in YouTube for the thing under point (or an interactive query).
 <kbd>C-S-RET</kbd> or <kbd>M-o</kbd> | Insert an empty line above the current line and indent it properly
 <kbd>S-RET</kbd> or <kbd>M-O</kbd> | Insert an empty line and indent it properly (as in most IDEs).
 <kbd>C-S-up</kbd>  | Move the current line up.
@@ -232,6 +235,14 @@ Keybinding         | Description
 <kbd>C-c t</kbd> | Open a terminal emulator (`ansi-term`).
 <kbd>C-c k</kbd> | Kill all open buffers except the one you're currently in.
 <kbd>C-c h</kbd> | Open Helm (a useful means of navigating your buffers and project files).
+<kbd>C-c +</kbd> | Increment integer at point.
+<kbd>C-c -</kbd> | Decrement integer at point.
+<kbd>Super-r</kbd> | Recent files
+<kbd>Super-x</kbd> | Expand region
+<kbd>Super-j</kbd> | Join lines
+<kbd>Super-k</kbd> | Kill whole line
+<kbd>Super-m</kbd> | Magit status
+<kbd>Super-o</kbd> | Open line above current line
 
 #### Projectile
 
@@ -256,6 +267,15 @@ Keybinding         | Description
 <kbd>C-c p p</kbd> | Runs a standard test command for your type of project.
 <kbd>C-c p z</kbd> | Adds the currently visited to the cache.
 <kbd>C-c p s</kbd> | Display a list of known projects you can switch to.
+
+Prelude adds some extra keybindings:
+
+Keybinding         | Command
+-------------------|------------------------------------------------------------
+<kbd>Super-f</kbd> | Find file in project
+<kbd>Super-d</kbd> | Find directory in project
+<kbd>Super-g</kbd> | Run grep on project
+<kbd>Super-p</kbd> | Switch projects
 
 If you ever forget any of Projectile's keybindings just do a:
 
@@ -325,7 +345,9 @@ Or you can use another theme altogether by adding something like:
 (load-theme 'solarized-dark t)
 ```
 
-P.S. Solarized is not available by default - you'll have to install it from MELPA first.
+**P.S.** Solarized is not available by default - you'll have to
+  install it from MELPA first (`M-x package-install RET
+  solarized-theme`).
 
 ### Personalizing
 
@@ -336,7 +358,13 @@ If you'd like to add some auto installation of packages in your
 personal config use the following code:
 
 ```lisp
-(prelude-ensure-module-deps '(some-package some-other-package))
+(prelude-require-packages '(some-package some-other-package))
+```
+
+If you require just a single package you can also use:
+
+```lisp
+(prelude-require-package 'some-package)
 ```
 
 #### Disabling whitespace-mode

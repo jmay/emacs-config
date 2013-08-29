@@ -27,6 +27,7 @@
 ;; rubymotion
 
 (add-hook 'ruby-mode-hook 'motion-recognize-project)
+(remove-hook 'ruby-mode-hook 'motion-recognize-project)
 ;;(add-to-list 'ac-modes 'motion-mode)
 ;;(add-to-list 'ac-sources 'ac-source-dictionary)
 
@@ -53,3 +54,9 @@ This functions should be added to the hooks of major modes for programming."
           1 font-lock-warning-face t))))
 
 (add-hook 'prog-mode-hook 'font-lock-comment-annotations)
+
+;; autocompletion
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/dict")
+(require 'auto-complete-config)
+(ac-config-default)
+(define-key ac-mode-map (kbd "C-c ,") 'auto-complete)
