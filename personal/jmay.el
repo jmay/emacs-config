@@ -13,7 +13,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Display theme
 
-(load-theme 'manoj-dark t)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+;; (load-theme 'manoj-dark t)
+(load-theme 'jmay t)
 
 ;; (load-theme 'zenburn t)                 ; low-contrast, background is grey
 
@@ -40,12 +42,14 @@
                                  yasnippet
                                  ;; https://github.com/Bruce-Connor/smart-mode-line
                                  smart-mode-line
+                                 ruby-refactor
                                  ;; to get markdown options to appear in org-mode
-                                 ox-md
+                                 ;; ox-md
+;;                                 rcodetools
                                  ) prelude-packages))
 
-
 ;; (require 'ox-md)      ; to get markdown options to appear in org-mode
+(require 'wisent-ruby)
 
 ;; Install my packages
 (prelude-install-packages)
@@ -100,5 +104,8 @@ When there is a text selection, act on the region."
       (put this-command 'stateIsCompact-p (if currentStateIsCompact nil t)) ) ) )
 
 (global-set-key (kbd "C-c q") 'compact-uncompact-block)
+
+(setq prelude-flyspell nil)
+
 
 ;;; jmay.el ends here

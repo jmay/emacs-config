@@ -76,3 +76,11 @@
 ;;     (self-insert-command N)))
 
 ;; (global-set-key (kbd "<backtab>") 'my-unindent-region)
+
+(global-set-key (kbd "C-*") 'mc/mark-all-like-this)
+
+(add-hook 'markdown-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c v") 'markdown-preview-file)
+            )
+          )

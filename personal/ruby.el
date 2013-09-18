@@ -2,6 +2,9 @@
 ;;
 ;; My personal extensions for Ruby programming
 
+(define-key ruby-mode-map (kbd "C-c C-c") 'xmp)
+
+
 (defun comment-or-uncomment-region-or-line ()
   "Comments or uncomments the region or the current line if there's no active region."
   (interactive)
@@ -36,6 +39,14 @@
 (add-hook 'prog-mode-hook '(lambda ()
                              (local-set-key (kbd "RET") 'newline-and-indent)))
 
+;; check for matching parens *after* saving (so the work is saved even if there's an error)
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (when buffer-file-name
+              (add-hook 'after-save-hook
+                        'check-parens
+                        nil t))))
+
 (defun align-to-equals (begin end)
   "Align region to equal signs"
   (interactive "r")
@@ -56,7 +67,7 @@ This functions should be added to the hooks of major modes for programming."
 (add-hook 'prog-mode-hook 'font-lock-comment-annotations)
 
 ;; autocompletion
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/dict")
+;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/dict")
 (require 'auto-complete-config)
 (ac-config-default)
 (define-key ac-mode-map (kbd "C-c ,") 'auto-complete)

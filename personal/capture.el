@@ -50,7 +50,7 @@
 
 (when (require 'deft nil 'noerror)
   (setq
-   deft-extension "org"
+;;   deft-extension "org"
    deft-directory "~/.deft"
    deft-text-mode 'org-mode
    deft-auto-save-interval 0
