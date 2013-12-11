@@ -31,7 +31,8 @@
 ;; navigation
 (global-set-key (read-kbd-macro "s-<down>") 'scroll-up-command)
 (global-set-key (read-kbd-macro "s-<up>") 'scroll-down-command)
-
+(global-set-key (read-kbd-macro "<next>") 'forward-paragraph)   ;; fn-down
+(global-set-key (read-kbd-macro "<prior>") 'backward-paragraph) ;; fn-up
 
 ;; programming
 (global-set-key (kbd "C-c \\") 'comment-or-uncomment-region-or-line)
@@ -84,3 +85,13 @@
             (local-set-key (kbd "C-c v") 'markdown-preview-file)
             )
           )
+
+(global-set-key (kbd "s-<right>") 'org-indent-item)
+(global-set-key (kbd "s-<left>") 'org-outdent-item)
+
+;; (global-set-key (kbd "C-c C-s") 'helm-spotify)
+
+;; (define-key ruby-mode-map (kbd "C-c C-c") 'xmp)
+
+;; easy-kill
+(global-set-key [remap kill-ring-save] 'easy-kill)

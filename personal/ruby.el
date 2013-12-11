@@ -2,9 +2,6 @@
 ;;
 ;; My personal extensions for Ruby programming
 
-(define-key ruby-mode-map (kbd "C-c C-c") 'xmp)
-
-
 (defun comment-or-uncomment-region-or-line ()
   "Comments or uncomments the region or the current line if there's no active region."
   (interactive)
@@ -15,6 +12,8 @@
     (comment-or-uncomment-region beg end)
     (next-line)))
 
+(setq comment-empty-lines t)
+
 (eval-after-load 'ruby-mode
   '(define-key ruby-mode-map (kbd "C-\\") 'comment-or-uncomment-region-or-line))
 
@@ -22,9 +21,9 @@
 (add-hook 'prog-mode-hook 'fci-mode)
 ;; show line numbers
 (add-hook 'prog-mode-hook 'linum-mode)
-
 (setq linum-format "%4d ")
-
+;; highlight indentation
+(add-hook 'prog-mode-hook 'highlight-indentation-mode)
 
 
 ;; rubymotion

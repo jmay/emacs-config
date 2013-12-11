@@ -28,7 +28,7 @@
          entry
          (file+headline "~/.deft/otherbase-todo.org" "Tasks")
          "* TODO %?\n  %i\n")
-        ("t"
+        ("v"
          "Veriphyr TODO"
          entry
          (file+headline "~/.deft/veriphyr-todo.org" "Tasks")
@@ -63,3 +63,7 @@
 
 ;; http://www.emacswiki.org/emacs/AutoFillMode
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+;; for MobileOrg
+(setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
+(setq org-directory "~/Dropbox/Apps/MobileOrg")

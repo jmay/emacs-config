@@ -8,3 +8,7 @@
 ;; (require 'sublimity)
 ;; (require 'sublimity-scroll)
 ;; (require 'sublimity-map)
+
+;; appears to have been abandoned
+;; some sort of CEDET support for ruby syntax
+;; (require 'wisent-ruby)
