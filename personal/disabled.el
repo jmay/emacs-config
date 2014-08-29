@@ -1,4 +1,4 @@
-;; interested packages that I have disabled
+;; interesting packages that I have disabled
 
 ;; Sublime Text-style minimap
 ;; disabled because it is slow and interrupts editing flow in the main area

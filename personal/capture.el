@@ -63,7 +63,49 @@
 
 ;; http://www.emacswiki.org/emacs/AutoFillMode
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
 
 ;; for MobileOrg
 (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
 (setq org-directory "~/Dropbox/Apps/MobileOrg")
+
+
+(defun my-org-export-change-options (plist backend)
+  (cond
+   ((equal backend 'html)
+    (plist-put plist :with-toc nil)
+    (plist-put plist :section-numbers t))
+   ((equal backend 'md)
+    (plist-put plist :with-toc nil)
+    (plist-put plist :section-numbers nil)))
+  plist)
+
+;; (add-to-list 'org-export-filter-options-functions 'my-org-export-change-options)
+
+
+;; idea for how to completely conceal/reveal the PROPERTIES blocks
+;; https://stackoverflow.com/questions/17478260/completely-hide-the-properties-drawer-in-org-mode
+;; (defun lawlist-org-cycle-hide-drawers (state)
+;;   "Re-hide all drawers after a visibility state change."
+;;   (when (and (derived-mode-p 'org-mode)
+;;        (not (memq state '(overview folded contents))))
+;;     (save-excursion
+;;       (let* ((globalp (memq state '(contents all)))
+;;              (beg (if globalp (point-min) (point)))
+;;              (end (if globalp (point-max)
+;;         (if (eq state 'children)
+;;       (save-excursion (outline-next-heading) (point))
+;;           (org-end-of-subtree t)))))
+;;   (goto-char beg)
+;;   (while (re-search-forward "^.*DEADLINE:.*$\\|^\\*\\* Someday.*$\\|^\\*\\* None.*$\\|^\\*\\* Planning.*$\\|^\\* TASKS.*$" end t)
+;;      (save-excursion
+;;     (beginning-of-line 1)
+;;     (when (looking-at "^.*DEADLINE:.*$\\|^\\*\\* Someday.*$\\|^\\*\\* None.*$\\|^\\*\\* Planning.*$\\|^\\* TASKS.*$")
+;;       (let ((b (match-end 0)))
+;;   (if (re-search-forward
+;;        "^[ \t]*:END:"
+;;        (save-excursion (outline-next-heading) (point)) t)
+;;       (outline-flag-region b (point-at-eol) t)
+;;     (user-error ":END: line missing at position %s" b))))))))))
+
+;; capture.el ends here

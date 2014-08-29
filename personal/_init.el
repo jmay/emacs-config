@@ -14,10 +14,13 @@
 ;; Display theme
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-;; (load-theme 'manoj-dark t)
-(load-theme 'jmay t)
+(load-theme 'jmay t)o
 
+;; (load-theme 'manoj-dark t)
 ;; (load-theme 'zenburn t)                 ; low-contrast, background is grey
+;; (load-theme 'Amelie t)
+;; (load-theme 'spolsky t)
+;; (load-theme 'firebelly t)
 
 (set-face-attribute 'default nil :family "Source Code Pro")
 (set-face-attribute 'default nil :weight 'light)
@@ -48,19 +51,26 @@
                                  hlinum ;; highlight current line number
                                  powerline ;; attractive mode line
                                  highlight-indentation
+                                 ;; minitest
+                                 switch-window
                                  ) prelude-packages))
 
+;; (ido-vertical-mode 1)
 ;;(load "../helm-spotify/helm-spotify")
 
 ;; ox-md is not a package, it is in emacs core, but it must be
 ;; required to active the markdown export options in org-mode
 (require 'ox-md)
-;;(require 'emmet-mode)
+;;(require 'Emmett-mode)
 (hlinum-activate)
 
+;; (require 'minitest)
+;; (add-hook 'ruby-mode-hook 'minitest-mode)
 ;; https://github.com/milkypostman/powerline
 ;; activate powerline (mode line theme)
-(powerline-default-theme)
+
+;;; ?????????????
+;;(powerline-default-theme)
 
 ;; (highlight-indentation-mode)
 ;; (set-face-background 'highlight-indentation-face "#202020")
@@ -72,6 +82,8 @@
 (add-to-list 'package-archive-exclude-alist '(("melpa" org)))
 
 (setq prelude-guru nil)                 ; enable keyboard arrow keys for navigation
+;;(guru-global-mode +1)
+;;(guru-mode +1)
 
 (setq whitespace-line-column 100)
 
@@ -132,19 +144,19 @@ When there is a text selection, act on the region."
 (global-set-key (kbd "C-c I") 'find-user-init-file)
 
 
-(require 'org-publish)
-(setq org-publish-project-alist
-      '(("html"
-         :base-directory "~/.deft"
-         :base-extension "org"
-         :publishing-directory "~/Documents/exports"
-         :publishing-function org-publish-org-to-html)
-        ("pdf"
-         :base-directory "~/.deft/"
-         :base-extension "org"
-         :publishing-directory "~/Documents/exports"
-         :publishing-function org-publish-org-to-pdf)
-        ("all" :components ("html" "pdf"))))
+;; (require 'org-publish)
+;; (setq org-publish-project-alist
+;;       '(("html"
+;;          :base-directory "~/.deft"
+;;          :base-extension "org"
+;;          :publishing-directory "~/Documents/exports"
+;;          :publishing-function org-publish-org-to-html)
+;;         ("pdf"
+;;          :base-directory "~/.deft/"
+;;          :base-extension "org"
+;;          :publishing-directory "~/Documents/exports"
+;;          :publishing-function org-publish-org-to-pdf)
+;;         ("all" :components ("html" "pdf"))))
 
 
 (require 'edit-server)

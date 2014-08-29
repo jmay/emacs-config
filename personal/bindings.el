@@ -34,8 +34,12 @@
 (global-set-key (read-kbd-macro "<next>") 'forward-paragraph)   ;; fn-down
 (global-set-key (read-kbd-macro "<prior>") 'backward-paragraph) ;; fn-up
 
+(key-chord-define-global "jj" nil) ;; disable this because I use jj in ruby
+(key-chord-define-global "jw" 'ace-jump-word-mode)
+
 ;; programming
 (global-set-key (kbd "C-c \\") 'comment-or-uncomment-region-or-line)
+(global-set-key (kbd "C-c ;") 'comment-or-uncomment-region-or-line)
 (global-set-key (kbd "s-/") 'comment-or-uncomment-region-or-line)
 
 ;; todo, notes, journal
@@ -66,6 +70,13 @@
 ;; Up for consideration
 ;; swap isearch-forward C-s and isearch-forward-regexp C-M-s
 ;; ditto backward C-r, C-M-R
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "C-M-s") 'isearch-forward)
+(global-set-key (kbd "C-M-r") 'isearch-backward)
+(global-set-key (kbd "M-%") 'query-replace-regexp)
+(global-set-key (kbd "C-M-%") 'query-replace)
+
 
 ;;; bindings.el ends here
 
@@ -79,6 +90,7 @@
 ;; (global-set-key (kbd "<backtab>") 'my-unindent-region)
 
 (global-set-key (kbd "C-*") 'mc/mark-all-like-this)
+(global-set-key (kbd "H-)") 'mc/mark-next-like-this)
 
 (add-hook 'markdown-mode-hook
           (lambda ()
@@ -92,6 +104,15 @@
 ;; (global-set-key (kbd "C-c C-s") 'helm-spotify)
 
 ;; (define-key ruby-mode-map (kbd "C-c C-c") 'xmp)
+(define-key ruby-mode-map (kbd "C-c M-l") 'ruby-reload-and-go)
 
 ;; easy-kill
 (global-set-key [remap kill-ring-save] 'easy-kill)
+
+(global-set-key (kbd "M-u") 'upcase-region-or-word)
+
+;; other candidate keys for rebinding
+;; C-z (default is suspend-frame)
+
+(global-set-key (kbd "C-x o") 'switch-window)
+(global-set-key (kbd "M-p") 'ace-window)

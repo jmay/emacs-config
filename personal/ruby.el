@@ -17,6 +17,9 @@
 (eval-after-load 'ruby-mode
   '(define-key ruby-mode-map (kbd "C-\\") 'comment-or-uncomment-region-or-line))
 
+(eval-after-load 'rspec-mode
+  '(rspec-install-snippets))
+
 ;; show fill column
 (add-hook 'prog-mode-hook 'fci-mode)
 ;; show line numbers
@@ -70,3 +73,14 @@ This functions should be added to the hooks of major modes for programming."
 (require 'auto-complete-config)
 (ac-config-default)
 (define-key ac-mode-map (kbd "C-c ,") 'auto-complete)
+
+;; inferior ruby
+(defun ruby-reload-and-go ()
+  "Send current buffer file to the inferior Ruby.
+Then switch to the process buffer."
+  (interactive)
+  (comint-check-source buffer-file-name) ; Check to see if buffer needs saved.
+  (comint-send-string (inf-ruby-proc) (concat "(load \""
+                                              (buffer-file-name)
+                                              "\"\)\n"))
+  (ruby-switch-to-inf t))
