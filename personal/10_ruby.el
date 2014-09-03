@@ -14,9 +14,6 @@
 
 (setq comment-empty-lines t)
 
-(eval-after-load 'ruby-mode
-  '(define-key ruby-mode-map (kbd "C-\\") 'comment-or-uncomment-region-or-line))
-
 (eval-after-load 'rspec-mode
   '(rspec-install-snippets))
 

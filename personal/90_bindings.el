@@ -103,8 +103,12 @@
 
 ;; (global-set-key (kbd "C-c C-s") 'helm-spotify)
 
-;; (define-key ruby-mode-map (kbd "C-c C-c") 'xmp)
-(define-key ruby-mode-map (kbd "C-c M-l") 'ruby-reload-and-go)
+(add-hook 'ruby-mode-hook
+          (lambda ()
+            (define-key ruby-mode-map (kbd "C-c C-c") 'xmp)
+            (define-key ruby-mode-map (kbd "C-c M-l") 'ruby-reload-and-go)
+            (define-key ruby-mode-map (kbd "C-\\") 'comment-or-uncomment-region-or-line)
+            ))
 
 ;; easy-kill
 (global-set-key [remap kill-ring-save] 'easy-kill)
@@ -116,3 +120,5 @@
 
 (global-set-key (kbd "C-x o") 'switch-window)
 (global-set-key (kbd "M-p") 'ace-window)
+
+(global-set-key (kbd "C-c q") 'compact-uncompact-block)

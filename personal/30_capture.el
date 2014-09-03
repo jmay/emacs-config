@@ -64,6 +64,7 @@
 ;; http://www.emacswiki.org/emacs/AutoFillMode
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
+(add-hook 'markdown-mode-hook 'turn-on-auto-fill)
 
 ;; for MobileOrg
 (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
