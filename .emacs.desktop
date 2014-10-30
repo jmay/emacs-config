@@ -1,0 +1,843 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Mon Mar 31 12:28:08 2014
+;; Desktop file format version 206
+;; Emacs version 24.3.1
+
+;; Global section:
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring '("aspect" "communi" "set.k" "def " "aff_aud" "steak" "stanford" "patbook" "patbooking" "qes delet" "deep" "a " "candidates" "refresh_all" "'cyber" "cyber"))
+(setq regexp-search-ring '("avondale" "principal w" "mesa" "original si" "scottsdale" "wi" "corporate" "olga " "zeffery" "lower" "sunnyvale" "f" "pick-up" "obama" "polit" "kuranda"))
+(setq register-alist nil)
+(setq file-name-history '("/Users/jmay/Documents/BASIS" "/Users/jmay/Dropbox/Documents/Notes/emacs_resources.org" "/Users/jmay/Dropbox/Documents/Notes/linda_startup_idea.org" "/Users/jmay/dev/otherbase/.env.development" "/Users/jmay/dev/rexis/.rvmrc" "/Users/jmay/dev/rexis/rexis.gemspec" "/Users/jmay/dev/rexis/Gemfile" "/Users/jmay/dev/sharing/lib/divulgence/share.rb" "/Users/jmay/dev/sharing/" "/Users/jmay/dev/otherbase/" "/Users/jmay/dev/rexis/.git/MERGE_MSG" "~/.emacs.d/" "/Users/jmay/Dropbox/Documents/Projects/Veriphyr/" "~/Dropbox/Documents/Projects/Veriphyr/" "/Users/jmay/Dropbox/Documents/Projects/Veriphyr/" "/Users/jmay/Dropbox/Documents/Notes/travel_plans_2014.org" "~/Dropbox/Documents/Notes/ed_tech.org" "/Users/jmay/Dropbox/Documents/Notes/daily-schedule.md" "/Users/jmay/Dropbox/Documents/Notes/00 TODO & REMINDERS.txt" "/Users/jmay/dev/working/rexis/.git/MERGE_MSG" "/Users/jmay/dev/rexis/.gitignore" "/Users/jmay/dev/rexis/rexis.gemspec" "/Users/jmay/dev/rexis/.git/COMMIT_EDITMSG" "/Users/jmay/dev/rexis/.test.env" "/Users/jmay/dev/rexis/lib/rexis/code.rb" "/Users/jmay/dev/rexis/migrations/002_codes.rb" "/Users/jmay/dev/rexis/.development.env" "/Users/jmay/dev/rexis/.test.env" "/Users/jmay/dev/rexis/migrations/003_nokind.rb" "/Users/jmay/dev/rexis/spec/lib/registry_spec.rb"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  nil
+  "BASIS"
+  'dired-mode
+  '(prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode projectile-mode anzu-mode yas-minor-mode magit-auto-revert-mode)
+  224
+  '(nil nil)
+  t
+  '("/Users/jmay/Documents/BASIS/")
+  nil)
+
+(desktop-create-buffer 206
+  "/Users/jmay/Dropbox/Documents/Notes/basis_school.org"
+  "basis_school.org"
+  'org-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode org-indent-mode magit-auto-revert-mode)
+  24061
+  '(14764 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/Dropbox/Documents/Notes/daily-schedule.md"
+  "daily-schedule.md"
+  'markdown-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode magit-auto-revert-mode)
+  156
+  '(104 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/Dropbox/Documents/Notes/ed_tech.org"
+  "ed_tech.org"
+  'org-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode org-indent-mode magit-auto-revert-mode)
+  19761
+  '(21887 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/Dropbox/Documents/Notes/00 TODO & REMINDERS.txt"
+  "00 TODO & REMINDERS.txt"
+  'markdown-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode magit-auto-revert-mode)
+  7105
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/Dropbox/Documents/Notes/Wine Opinions.org"
+  "Wine Opinions.org"
+  'org-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode org-indent-mode magit-auto-revert-mode)
+  3599
+  '(2809 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/Dropbox/Documents/Notes/bay_area_demographics.org"
+  "bay_area_demographics.org"
+  'org-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode org-indent-mode magit-auto-revert-mode)
+  328
+  '(3388 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/Dropbox/Documents/Notes/linda_startup_idea.org"
+  "linda_startup_idea.org"
+  'org-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode org-indent-mode magit-auto-revert-mode)
+  2297
+  '(8823 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/Dropbox/Documents/Notes/travel_plans_2014.org"
+  "travel_plans_2014.org"
+  'org-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode org-indent-mode magit-auto-revert-mode)
+  7425
+  '(7184 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/Dropbox/Documents/Notes/emacs_resources.org"
+  "emacs_resources.org"
+  'org-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode org-indent-mode magit-auto-revert-mode)
+  1200
+  '(1 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/Dropbox/Documents/Notes/job_opportunities.org"
+  "job_opportunities.org"
+  'org-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode org-indent-mode magit-auto-revert-mode)
+  340
+  '(340 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/Dropbox/Documents/Notes/education_thoughts.org"
+  "education_thoughts.org"
+  'org-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode org-indent-mode magit-auto-revert-mode)
+  101162
+  '(100876 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/Dropbox/Documents/Notes/about_gabriel.org"
+  "about_gabriel.org"
+  'org-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode org-indent-mode magit-auto-revert-mode)
+  5208
+  '(5207 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/Dropbox/Documents/Notes/Los Altos, LASD, LAEF.txt"
+  "Los Altos, LASD, LAEF.txt"
+  'markdown-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode magit-auto-revert-mode)
+  1
+  '(9388 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-file-coding-system . utf-8-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "Notes"
+  'dired-mode
+  '(prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode projectile-mode anzu-mode yas-minor-mode magit-auto-revert-mode)
+  385
+  '(nil nil)
+  t
+  '("/Users/jmay/Dropbox/Documents/Notes/")
+  nil)
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/otherbase/lib/otherbase/node.rb"
+  "node.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  2788
+  '(2680 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/otherbase/test/lib/test_registration.rb"
+  "test_registration.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  253
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/otherbase/lib/otherbase/registration.rb"
+  "registration.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  842
+  '(842 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/otherbase/lib/otherbase/share.rb"
+  "share.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  1568
+  '(1 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/otherbase/spec/lib/share_spec.rb"
+  "share_spec.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  1406
+  '(785 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/otherbase/spec/lib/sharing_api_spec.rb"
+  "sharing_api_spec.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  204
+  '(3815 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/otherbase/lib/otherbase.rb"
+  "otherbase.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  267
+  '(254 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/otherbase/spec/lib/subscription_spec.rb"
+  "subscription_spec.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  5293
+  '(1582 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/otherbase/.env.test"
+  ".env.test"
+  'fundamental-mode
+  '(prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode projectile-mode anzu-mode undo-tree-mode yas-minor-mode magit-auto-revert-mode)
+  39
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/rexis/lib/rexis.rb"
+  "rexis.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  168
+  '(130 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/otherbase/.env.development"
+  ".env.development"
+  'fundamental-mode
+  '(prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode projectile-mode anzu-mode undo-tree-mode yas-minor-mode magit-auto-revert-mode)
+  38
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/otherbase/.env"
+  ".env"
+  'fundamental-mode
+  '(prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode projectile-mode anzu-mode undo-tree-mode yas-minor-mode magit-auto-revert-mode)
+  282
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "otherbase"
+  'dired-mode
+  '(prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode projectile-mode anzu-mode yas-minor-mode magit-auto-revert-mode)
+  230
+  '(nil nil)
+  t
+  '("/Users/jmay/dev/otherbase/")
+  nil)
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/rexis/.rvmrc"
+  ".rvmrc"
+  'fundamental-mode
+  '(prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode projectile-mode anzu-mode undo-tree-mode yas-minor-mode magit-auto-revert-mode)
+  12
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/rexis/rexis.gemspec"
+  "rexis.gemspec"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  219
+  '(1030 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/rexis/Gemfile"
+  "Gemfile"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  12
+  '(1 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/.emacs.d/elpa/rvm-20140109.319/rvm.el"
+  "rvm.el"
+  'emacs-lisp-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode eldoc-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode elisp-slime-nav-mode rainbow-delimiters-mode rainbow-mode magit-auto-revert-mode)
+  9357
+  '(9341 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/otherbase/Gemfile"
+  "Gemfile"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  296
+  '(25 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/otherbase/otherbase.gemspec"
+  "otherbase.gemspec"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  1
+  '(1884 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/otherbase/lib/otherbase/server.rb"
+  "server.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  10736
+  '(10770 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/sharing/lib/divulgence/subscription.rb"
+  "subscription.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  3136
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/sharing/divulgence.gemspec"
+  "divulgence.gemspec"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  722
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/sharing/lib/divulgence/share.rb"
+  "share.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  824
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/sharing/lib/divulgence/context.rb"
+  "context.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  239
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/sharing/lib/divulgence.rb"
+  "divulgence.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  nil
+  "sharing"
+  'dired-mode
+  '(prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode projectile-mode anzu-mode yas-minor-mode magit-auto-revert-mode)
+  224
+  '(nil nil)
+  t
+  '("/Users/jmay/dev/sharing/")
+  nil)
+
+(desktop-create-buffer 206
+  "/Users/jmay/Dropbox/Documents/Notes/veriphyr.org"
+  "veriphyr.org"
+  'org-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode org-indent-mode magit-auto-revert-mode)
+  16151
+  '(12276 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/Dropbox/Documents/Projects/Veriphyr/Competition.markdown"
+  "Competition.markdown"
+  'markdown-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode magit-auto-revert-mode)
+  6139
+  '(4670 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-file-coding-system . utf-8-unix)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/Dropbox/Documents/Projects/Veriphyr/Healthcare IT Vendors.md"
+  "Healthcare IT Vendors.md"
+  'markdown-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode magit-auto-revert-mode)
+  70
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "Veriphyr"
+  'dired-mode
+  '(prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode projectile-mode anzu-mode yas-minor-mode magit-auto-revert-mode)
+  721
+  '(nil nil)
+  t
+  '("/Users/jmay/Dropbox/Documents/Projects/Veriphyr/")
+  nil)
+
+(desktop-create-buffer 206
+  "/Users/jmay/Dropbox/Documents/Projects/Veriphyr/Clients/Sibley/Sibley.md"
+  "Sibley.md"
+  'markdown-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode magit-auto-revert-mode)
+  1
+  '(783 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-file-coding-system . utf-8-unix)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/rexis/lib/rexis/registry_server.rb"
+  "registry_server.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  1023
+  '(635 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/rexis/config.ru"
+  "config.ru"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  307
+  '(144 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  nil
+  "rexis"
+  'dired-mode
+  '(prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode projectile-mode anzu-mode yas-minor-mode magit-auto-revert-mode)
+  931
+  '(nil nil)
+  t
+  '("/Users/jmay/dev/rexis/")
+  nil)
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/rexis/migrations/003_nokind.rb"
+  "003_nokind.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  94
+  '(62 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/Dropbox/Documents/Notes/math_textbooks.org"
+  "math_textbooks.org"
+  'org-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode org-indent-mode magit-auto-revert-mode)
+  13549
+  '(7128 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/rexis/Rakefile"
+  "Rakefile"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  29
+  '(30 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/rexis/.gitignore"
+  ".gitignore"
+  'gitignore-mode
+  '(prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode projectile-mode anzu-mode undo-tree-mode yas-minor-mode magit-auto-revert-mode)
+  181
+  '(1 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/working/rexis/Gemfile"
+  "Gemfile"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  12
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  nil
+  "rexis"
+  'dired-mode
+  '(prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode projectile-mode anzu-mode yas-minor-mode magit-auto-revert-mode)
+  342
+  '(nil nil)
+  t
+  '("/Users/jmay/dev/working/rexis/")
+  nil)
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/rexis/README.md"
+  "README.md"
+  'markdown-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode magit-auto-revert-mode)
+  832
+  '(1489 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/rexis/lib/rexis/item.rb"
+  "item.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  367
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/rexis/lib/rexis/code.rb"
+  "code.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  252
+  '(124 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/rexis/.test.env"
+  ".test.env"
+  'fundamental-mode
+  '(prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode projectile-mode anzu-mode undo-tree-mode yas-minor-mode magit-auto-revert-mode)
+  113
+  '(109 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/rexis/.development.env"
+  ".development.env"
+  'fundamental-mode
+  '(prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode projectile-mode anzu-mode undo-tree-mode yas-minor-mode magit-auto-revert-mode)
+  102
+  '(77 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/rexis/migrations/002_codes.rb"
+  "002_codes.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/rexis/spec/lib/item_spec.rb"
+  "item_spec.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  258
+  '(1 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/rexis/.env"
+  ".env"
+  'fundamental-mode
+  '(prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode projectile-mode anzu-mode undo-tree-mode yas-minor-mode magit-auto-revert-mode)
+  25
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/rexis/views/layout.haml"
+  "layout.haml"
+  'haml-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode yas-minor-mode highlight-indentation-mode magit-auto-revert-mode)
+  295
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/rexis/spec/lib/registry_spec.rb"
+  "registry_spec.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  97
+  '(91 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/dev/rexis/lib/rexis/registry.rb"
+  "registry.rb"
+  'ruby-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode rspec-verifiable-mode inf-ruby-minor-mode ruby-tools-mode magit-auto-revert-mode)
+  68
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/Dropbox/Documents/Notes/harvard_connections.org"
+  "harvard_connections.org"
+  'org-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode org-indent-mode magit-auto-revert-mode)
+  1408
+  '(1291 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/.emacs.d/personal/jmay.el"
+  "jmay.el"
+  'emacs-lisp-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode eldoc-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode elisp-slime-nav-mode rainbow-delimiters-mode rainbow-mode magit-auto-revert-mode)
+  2719
+  '(2719 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  nil
+  ".emacs.d"
+  'dired-mode
+  '(prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode projectile-mode anzu-mode yas-minor-mode rspec-mode magit-auto-revert-mode)
+  845
+  '(nil nil)
+  t
+  '("/Users/jmay/.emacs.d/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "dev"
+  'dired-mode
+  '(prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode projectile-mode anzu-mode yas-minor-mode magit-auto-revert-mode)
+  1821
+  '(nil nil)
+  t
+  '("/Users/jmay/dev/")
+  nil)
+
+(desktop-create-buffer 206
+  "/Users/jmay/.emacs.d/elpa/rspec-mode-20140223.1340/rspec-mode.el"
+  "rspec-mode.el"
+  'emacs-lisp-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode eldoc-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode elisp-slime-nav-mode rainbow-delimiters-mode rainbow-mode magit-auto-revert-mode)
+  13425
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/.deft/journal.org"
+  "journal.org"
+  'org-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode org-indent-mode magit-auto-revert-mode)
+  63528
+  '(61924 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/usr/local/Cellar/emacs/24.3/share/emacs/24.3/lisp/loaddefs.el"
+  "loaddefs.el"
+  'emacs-lisp-mode
+  '(prelude-mode global-auto-revert-mode smartparens-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode eldoc-mode undo-tree-mode flycheck-mode linum-mode auto-complete-mode yas-minor-mode highlight-indentation-mode elisp-slime-nav-mode rainbow-delimiters-mode rainbow-mode magit-auto-revert-mode)
+  233516
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/.deft/emacs-todo.org"
+  "emacs-todo.org"
+  'org-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode magit-auto-revert-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Users/jmay/.deft/otherbase-todo.org"
+  "otherbase-todo.org"
+  'org-mode
+  '(auto-fill-mode abbrev-mode prelude-mode global-auto-revert-mode volatile-highlights-mode flx-ido-mode flyspell-mode projectile-mode anzu-mode whitespace-mode undo-tree-mode yas-minor-mode magit-auto-revert-mode)
+  466
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix) (truncate-lines . t)))
+

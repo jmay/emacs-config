@@ -48,6 +48,8 @@
 
 (global-set-key (kbd "C-c b") 'browse-url-at-point)
 
+(global-set-key (kbd "s-C") 'my-copy-simple)
+
 ;; notes on other bindings
 ;;
 ;; windmove package sets shift-arrow bindings to navigate between windows,
@@ -86,7 +88,6 @@
 ;;       (progn (indent-rigidly (min (mark) (point)) (max (mark) (point)) (* N -2))
 ;;              (setq deactivate-mark nil))
 ;;     (self-insert-command N)))
-
 ;; (global-set-key (kbd "<backtab>") 'my-unindent-region)
 
 (global-set-key (kbd "C-*") 'mc/mark-all-like-this)
@@ -122,3 +123,12 @@
 (global-set-key (kbd "M-p") 'ace-window)
 
 (global-set-key (kbd "C-c q") 'compact-uncompact-block)
+
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (define-key org-mode-map (kbd "C-c M-l") 'org-mac-grab-link)))
+
+(global-set-key (kbd "C-c C-b") 'bundle-console)
+
+;; 90_bindings.el ends here

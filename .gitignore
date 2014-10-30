@@ -20,3 +20,5 @@ projectile-bookmarks.eld
 session*
 .cask
 tmp
+.mc-lists.el
+ac-comphist.dat

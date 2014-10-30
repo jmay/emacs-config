@@ -12,3 +12,8 @@
 ;; appears to have been abandoned
 ;; some sort of CEDET support for ruby syntax
 ;; (require 'wisent-ruby)
+;;
+;; ideas: a "toggle" map for various switches; a "launcher" map for external apps
+;; (define-prefix-command 'my/whatever-map)
+;; (global-set-key (kbd "H-l") 'my/whatever-map)
+;; (global-set-key (my/whatever-map "x" 'do-something)

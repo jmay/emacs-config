@@ -89,8 +89,8 @@
 (global-set-key (kbd "C-c I") 'find-user-init-file)
 
 
-(require 'edit-server)
-(edit-server-start)
+;;(require 'edit-server)
+;;(edit-server-start)
 
 ;; default value of 'midnight-hook is 'clean-buffer-list
 ;; I do not want emacs to close all my buffers every night
