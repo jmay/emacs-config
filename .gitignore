@@ -22,3 +22,5 @@ session*
 tmp
 .mc-lists.el
 ac-comphist.dat
+tramp
+/var/pcache
