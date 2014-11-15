@@ -131,4 +131,6 @@
 
 (global-set-key (kbd "C-c C-b") 'bundle-console)
 
+(global-set-key (kbd "C-c M-q") 'toggle-fill-unfill)
+
 ;; 90_bindings.el ends here
