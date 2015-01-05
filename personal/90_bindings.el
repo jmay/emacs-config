@@ -17,6 +17,7 @@
 ;;
 ;; http://ergoemacs.org/emacs/keyboard_shortcuts.html
 
+;;; Code:
 (setq mac-command-modifier 'super)
 (setq mac-option-modifier 'hyper)
 
@@ -36,6 +37,13 @@
 
 (key-chord-define-global "jj" nil) ;; disable this because I use jj in ruby
 (key-chord-define-global "jw" 'ace-jump-word-mode)
+
+;; http://sachachua.com/blog/2014/12/emacs-kaizen-ace-jump-zap-lets-use-c-u-zap-character/
+(use-package ace-jump-zap
+             :ensure ace-jump-zap
+             :bind
+             (("M-z" . ace-jump-zap-up-to-char-dwim)
+              ("C-M-z" . ace-jump-zap-to-char-dwim)))
 
 ;; programming
 (global-set-key (kbd "C-c \\") 'comment-or-uncomment-region-or-line)
@@ -109,7 +117,10 @@
             (define-key ruby-mode-map (kbd "C-c C-c") 'xmp)
             (define-key ruby-mode-map (kbd "C-c M-l") 'ruby-reload-and-go)
             (define-key ruby-mode-map (kbd "C-\\") 'comment-or-uncomment-region-or-line)
+;;            (define-key rspec-mode-keymap (kbd "s") 'rspec-verify-single)
             ))
+;; ruby-refactor adds C-c C-r keymap with {e, v, c, p, l}
+
 
 ;; easy-kill
 (global-set-key [remap kill-ring-save] 'easy-kill)
@@ -133,4 +144,11 @@
 
 (global-set-key (kbd "C-c M-q") 'toggle-fill-unfill)
 
-;; 90_bindings.el ends here
+;; navigating between buffers
+;; windmove moves the cursor; buf-move swaps entire buffers
+(global-set-key (kbd "<A-left>")   'windmove-left)
+(global-set-key (kbd "<A-right>")  'windmove-right)
+(global-set-key (kbd "<A-H-left>")   'buf-move-left)
+(global-set-key (kbd "<A-H-right>")  'buf-move-right)
+
+;;; 90_bindings.el ends here

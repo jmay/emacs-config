@@ -42,7 +42,12 @@
          "Journal"
          entry
          (file+datetree "~/.deft/journal.org")
-         "* %?\n\n")
+         "* %?\n%i\n")
+        ("s"
+         "Schoolistry Journal"
+         entry
+         (file+datetree "~/.deft/journal.org")
+         "* %? :schoolistry:\n%i\n")
         )
       )
 

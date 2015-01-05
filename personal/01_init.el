@@ -68,8 +68,9 @@
 ;;  (add-hook 'after-init-hook 'sml/setup))
 
 ;; use markdown-mode for .txt files
-
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
+;; j2-mode for .es6 files
+(add-to-list 'auto-mode-alist '("\\.es6\\'" . js2-mode))
 
 ;; TODO additional packages to consider
 ;; http://sachachua.com/blog/2011/12/emacs-artbollocks-mode-el-and-writing-more-clearly/
@@ -95,5 +96,10 @@
 ;; default value of 'midnight-hook is 'clean-buffer-list
 ;; I do not want emacs to close all my buffers every night
 (remove-hook 'midnight-hook 'clean-buffer-list)
+
+(custom-set-variables
+ '(js2-basic-offset 2)
+ '(js2-bounce-indent-p t)
+ )
 
 ;;; my _init.el ends here

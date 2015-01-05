@@ -10,7 +10,7 @@
         (setq beg (region-beginning) end (region-end))
       (setq beg (line-beginning-position) end (line-end-position)))
     (comment-or-uncomment-region beg end)
-    (next-line)))
+    (forward-line)))
 
 (setq comment-empty-lines t)
 
@@ -28,11 +28,14 @@
 
 ;; rubymotion
 
-(add-hook 'ruby-mode-hook 'motion-recognize-project)
-(remove-hook 'ruby-mode-hook 'motion-recognize-project)
+;; (add-hook 'ruby-mode-hook 'motion-recognize-project)
+;; (remove-hook 'ruby-mode-hook 'motion-recognize-project)
 ;;(add-to-list 'ac-modes 'motion-mode)
 ;;(add-to-list 'ac-sources 'ac-source-dictionary)
 
+;; https://github.com/ajvargo/ruby-refactor
+;; this defines C-c C-r as a keymap and adds bindings there
+(add-hook 'ruby-mode-hook 'ruby-refactor-mode-launch)
 
 ;; http://www.emacswiki.org/emacs/AutoIndentation
 (add-hook 'prog-mode-hook '(lambda ()
