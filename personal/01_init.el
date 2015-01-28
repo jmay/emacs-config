@@ -16,6 +16,14 @@
 ;; MAYBE NOT...
 ;; (setq tags-table-list '("/Users/jmay/dev/TAGS"))
 
+;; https://github.com/tarsius/auto-compile
+(setq load-prefer-newer t)
+(require 'auto-compile)
+(auto-compile-on-load-mode 1)
+(auto-compile-on-save-mode 1)
+;; (setq auto-compile-display-buffer nil)
+;; (setq auto-compile-mode-line-counter t)
+
 ;; My packages
 
 (setq prelude-packages (append '(
@@ -26,7 +34,7 @@
                                  minimap
                                  ;; http://www.emacswiki.org/emacs/BrowseKillRing
                                  browse-kill-ring
-                                 yasnippet
+                                 ;; yasnippet
                                  ;; https://github.com/Bruce-Connor/smart-mode-line
                                  smart-mode-line
                                  ruby-refactor
@@ -90,8 +98,8 @@
 (global-set-key (kbd "C-c I") 'find-user-init-file)
 
 
-;;(require 'edit-server)
-;;(edit-server-start)
+;; (require 'edit-server)
+;; (edit-server-start)
 
 ;; default value of 'midnight-hook is 'clean-buffer-list
 ;; I do not want emacs to close all my buffers every night
@@ -101,5 +109,28 @@
  '(js2-basic-offset 2)
  '(js2-bounce-indent-p t)
  )
+
+;; https://github.com/rranelli/emacs-dotfiles/blob/master/lisp/init-bootstrap.el
+
+(setq jwm-initialization-errors ())
+
+(defun jwm-safe-require (feature)
+  "Safely requires FEATURE."
+  (condition-case ex
+      (require feature)
+    ('error (add-to-list 'jwm-initialization-errors
+			 (format "[ERROR LOADING \"%s\"]: %s" (symbol-name feature) ex)))))
+
+(defun jwm-safe-load (file)
+  "Safely loads FILE."
+  (condition-case ex
+      (load file)
+    ('error (add-to-list 'jwm-initialization-errors
+			 (format "[ERROR LOADING \"%s\"]: %s" file ex)))))
+
+(defun jwm-safe-load-init-files ()
+  (mapc 'jwm-safe-load (directory-files "./pieces" 't "^[^#]*.el$")))
+
+;; (jwm-safe-load-init-files)
 
 ;;; my _init.el ends here

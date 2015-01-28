@@ -35,3 +35,20 @@ When there is a text selection, act on the region."
             (fill-paragraph nil)) ) )
 
       (put this-command 'stateIsCompact-p (if currentStateIsCompact nil t)) ) ) )
+
+
+;; http://oremacs.com/2015/01/14/repeatable-commands/
+(defun def-rep-command (alist)
+  "Return a lambda that calls the first function of ALIST.
+It sets the transient map to all functions of ALIST."
+  (lexical-let ((keymap (make-sparse-keymap))
+                (func (cdar alist)))
+    (mapc (lambda (x)
+            (define-key keymap (car x) (cdr x)))
+          alist)
+    (lambda (arg)
+      (interactive "p")
+      (funcall func arg)
+      (set-transient-map keymap t))))
+
+;;; 20_functions.el ends here

@@ -39,6 +39,7 @@
 (key-chord-define-global "jw" 'ace-jump-word-mode)
 
 ;; http://sachachua.com/blog/2014/12/emacs-kaizen-ace-jump-zap-lets-use-c-u-zap-character/
+(require 'use-package)
 (use-package ace-jump-zap
              :ensure ace-jump-zap
              :bind
@@ -148,7 +149,33 @@
 ;; windmove moves the cursor; buf-move swaps entire buffers
 (global-set-key (kbd "<A-left>")   'windmove-left)
 (global-set-key (kbd "<A-right>")  'windmove-right)
+(global-set-key (kbd "<A-up>")  'windmove-up)
+(global-set-key (kbd "<A-down>")  'windmove-down)
+
 (global-set-key (kbd "<A-H-left>")   'buf-move-left)
 (global-set-key (kbd "<A-H-right>")  'buf-move-right)
+
+
+;; http://oremacs.com/2015/01/14/repeatable-commands/
+;; http://oremacs.com/2015/01/20/introducing-hydra/
+
+;; (global-set-key (kbd "<f2> ]")
+;;                 (def-rep-command
+;;                   '(("]" . text-scale-increase)
+;;                     ("[" . text-scale-decrease))))
+;; (global-set-key (kbd "<f2> [")
+;;                 (def-rep-command
+;;                   '(("[" . text-scale-decrease)
+;;                     ("]" . text-scale-increase))))
+
+(use-package hydra
+  :ensure t
+  :config
+  (progn
+    (hydra-create "<f2>"
+                  '(("]" text-scale-increase)
+                    ("[" text-scale-decrease)))
+    )
+  )
 
 ;;; 90_bindings.el ends here

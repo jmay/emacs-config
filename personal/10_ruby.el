@@ -1,4 +1,4 @@
-;; ruby.el
+;;; 10_ruby.el
 ;;
 ;; My personal extensions for Ruby programming
 
@@ -23,7 +23,7 @@
 (add-hook 'prog-mode-hook 'linum-mode)
 (setq linum-format "%4d ")
 ;; highlight indentation
-(add-hook 'prog-mode-hook 'highlight-indentation-mode)
+;; (add-hook 'prog-mode-hook 'highlight-indentation-mode)
 
 
 ;; rubymotion
@@ -84,3 +84,7 @@ Then switch to the process buffer."
                                               (buffer-file-name)
                                               "\"\)\n"))
   (ruby-switch-to-inf t))
+
+(add-hook 'projectile-mode-hook 'projectile-rails-on)
+
+;;; 10_ruby.el ends here
