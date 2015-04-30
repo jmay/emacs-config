@@ -17,7 +17,7 @@
 
 
 ;; https://gist.github.com/xahlee/d364cbbff9b3abd12d29
-                                        ; http://emacs.stackexchange.com/questions/1051/copy-region-from-emacs-without-newlines
+; http://emacs.stackexchange.com/questions/1051/copy-region-from-emacs-without-newlines
 (defun my-copy-simple (&optional beg end)
   "Save the current region (or line) to the `kill-ring' after stripping extra whitespace and new lines"
   (interactive

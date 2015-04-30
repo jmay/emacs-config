@@ -131,7 +131,12 @@
 ;; other candidate keys for rebinding
 ;; C-z (default is suspend-frame)
 
-(global-set-key (kbd "C-x o") 'switch-window)
+;; switch-window displays big numbers in each window when there are
+;; more than 2. Turned this off because I'm using arrow navigation
+;; with windmove (see below)
+;;
+;;(global-set-key (kbd "C-x o") 'switch-window)
+
 (global-set-key (kbd "M-p") 'ace-window)
 
 (global-set-key (kbd "C-c q") 'compact-uncompact-block)
@@ -172,9 +177,42 @@
   :ensure t
   :config
   (progn
-    (hydra-create "<f2>"
-                  '(("]" text-scale-increase)
-                    ("[" text-scale-decrease)))
+    (defhydra hydra-zoom (global-map "<f2>")
+      "zoom"
+      ("]" text-scale-increase "in")
+      ("[" text-scale-decrease "out")
+      )
+
+    (defhydra hydra-window (:color amaranth)
+      "window"
+      ;; navigation
+      ("h" windmove-left)
+      ("j" windmove-down)
+      ("k" windmove-up)
+      ("l" windmove-right)
+      ;; create new window and navigate to i
+      ("v" (lambda ()
+             (interactive)
+             (split-window-right)
+             (windmove-right))
+       "vert")
+      ("x" (lambda ()
+             (interactive)
+             (split-window-below)
+             (windmove-down))
+       "horz")
+      ;; ("t" transpose-frame "'")
+      ("o" delete-other-windows "one" :color blue)
+      ("a" ace-window "ace")
+      ("s" ace-swap-window "swap")
+      ("d" ace-delete-window "del")
+      ("i" ace-maximize-window "ace-one" :color blue)
+      ("b" ido-switch-buffer "buf")
+      ;; ("m" headlong-bookmark-jump "bmk")
+      ("q" nil "cancel")
+      )
+
+    (global-set-key (kbd "<f8>") 'hydra-window/body)
     )
   )
 
