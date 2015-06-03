@@ -14,7 +14,10 @@
 (add-hook 'org-shiftdown-final-hook 'windmove-down)
 (add-hook 'org-shiftright-final-hook 'windmove-right)
 
-(setq org-default-notes-file "~/.deft/notes.org")
+;; (setq org-default-notes-file "~/.deft/notes.org")
+
+;; force UTF-8
+(setq org-export-coding-system 'utf-8)
 
 (setq org-capture-templates
       '(
@@ -53,14 +56,14 @@
 
 ;; using deft with org-mode
 
-(when (require 'deft nil 'noerror)
-  (setq
-;;   deft-extension "org"
-   deft-directory "~/.deft"
-   deft-text-mode 'org-mode
-   deft-auto-save-interval 0
-  )
-  (global-set-key (kbd "<f9>") 'deft))
+;; (when (require 'deft nil 'noerror)
+;;   (setq
+;; ;;   deft-extension "org"
+;;    deft-directory "~/.deft"
+;;    deft-text-mode 'org-mode
+;;    deft-auto-save-interval 0
+;;   )
+;;   (global-set-key (kbd "<f9>") 'deft))
 
 ;; 130718 currently I don't like the deft auto-save because it triggers whitespace-cleanup
 ;; couldn't turn it off once Deft has been loaded, needed to do this:
@@ -113,5 +116,16 @@
 ;;        (save-excursion (outline-next-heading) (point)) t)
 ;;       (outline-flag-region b (point-at-eol) t)
 ;;     (user-error ":END: line missing at position %s" b))))))))))
+
+;; fontify code in code blocks
+(setq org-src-fontify-natively t)
+
+(use-package org-bullets
+  :ensure t
+  :config
+  (progn
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+    )
+  )
 
 ;; capture.el ends here

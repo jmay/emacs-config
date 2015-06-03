@@ -63,7 +63,7 @@
 ;; Install my packages
 (prelude-install-packages)
 
-(add-to-list 'package-archive-exclude-alist '(("melpa" org)))
+;; (add-to-list 'package-archive-exclude-alist '(("melpa" org)))
 
 (setq prelude-guru nil)                 ; enable keyboard arrow keys for navigation
 ;;(guru-global-mode +1)

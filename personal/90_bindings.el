@@ -1,5 +1,7 @@
 ;;; bindings.el --- my personal keyboard bindings
 ;;
+;;; Commentary:
+;;
 ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html
 ;; "Sequences consisting of C-c and a letter (either upper or lower case) are reserved for users"
 ;; For multi-modifier combinations, write the modifiers in alphabetical order (C-H-M-s-S)
@@ -29,14 +31,19 @@
 (add-to-list 'dash-at-point-mode-alist '(perl-mode . "perl"))
 
 
-;; navigation
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Navigation
+
 (global-set-key (read-kbd-macro "s-<down>") 'scroll-up-command)
 (global-set-key (read-kbd-macro "s-<up>") 'scroll-down-command)
 (global-set-key (read-kbd-macro "<next>") 'forward-paragraph)   ;; fn-down
 (global-set-key (read-kbd-macro "<prior>") 'backward-paragraph) ;; fn-up
 
 (key-chord-define-global "jj" nil) ;; disable this because I use jj in ruby
-(key-chord-define-global "jw" 'ace-jump-word-mode)
+;; (key-chord-define-global "jw" 'ace-jump-word-mode)
+;; (key-chord-define-global "yy" 'ace-jump-word-mode)
+(key-chord-define-global "jw" 'avy-goto-word-1)
+(key-chord-define-global "yy" 'avy-goto-word-1)
 
 ;; http://sachachua.com/blog/2014/12/emacs-kaizen-ace-jump-zap-lets-use-c-u-zap-character/
 (require 'use-package)
@@ -45,6 +52,14 @@
              :bind
              (("M-z" . ace-jump-zap-up-to-char-dwim)
               ("C-M-z" . ace-jump-zap-to-char-dwim)))
+
+;; avy-goto-line supports letter-combo shortcuts and line numbers
+;; http://oremacs.com/2015/05/17/avy-goto-line/
+
+(global-set-key (kbd "M-g g") 'avy-goto-line)
+(global-set-key (kbd "s-l") 'avy-goto-line)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; programming
 (global-set-key (kbd "C-c \\") 'comment-or-uncomment-region-or-line)
@@ -213,6 +228,16 @@
       )
 
     (global-set-key (kbd "<f8>") 'hydra-window/body)
+    )
+  )
+
+(use-package reveal-in-finder
+  :ensure t
+  :config
+  (progn
+    ;; make this the default binding for C-c C-o
+    ;; org-mode changes behavior when point is on a link
+    (global-set-key (kbd "C-c C-o") 'reveal-in-finder)
     )
   )
 

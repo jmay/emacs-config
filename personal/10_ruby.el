@@ -14,8 +14,20 @@
 
 (setq comment-empty-lines t)
 
-(eval-after-load 'rspec-mode
-  '(rspec-install-snippets))
+;; (use-package rspec-mode
+;;   :ensure t
+;;   :config
+;;   (progn
+;;     (eval-after-load 'rspec-mode
+;;       '(rspec-install-snippets))
+;;     )
+;;   )
+
+;; rspec-install-snippets uses yasnippet, which I have
+;; installed for now. So I don't want this.
+(eval-after-load 'rspec-mode '()
+                 ;; '(rspec-install-snippets))
+)
 
 ;; show fill column
 (add-hook 'prog-mode-hook 'fci-mode)

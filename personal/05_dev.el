@@ -31,4 +31,11 @@
 ;;   :ensure t
 ;;   )
 
+;; (use-package helm-google
+;;   :ensure t
+;;   :config
+;;   (setq jwm-testing 123)
+;;   (message "done!")
+;;   )
+
 ;;; 05_dev.el ends here
