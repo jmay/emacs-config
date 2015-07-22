@@ -68,7 +68,13 @@
                                           "%b"))))
 
 ;; use zenburn as the default theme
-(load-theme prelude-theme t)
+(when prelude-theme
+  (load-theme prelude-theme t))
+
+(require 'smart-mode-line)
+(setq sml/no-confirm-load-theme t)
+(setq sml/theme 'respectful)
+(add-hook 'after-init-hook #'sml/setup)
 
 (provide 'prelude-ui)
 ;;; prelude-ui.el ends here

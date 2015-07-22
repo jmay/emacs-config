@@ -42,9 +42,8 @@
 (package-initialize)
 
 (defvar prelude-packages
-  '(ace-jump-mode
-    ace-jump-buffer
-    ace-window
+  '(ace-window
+    avy
     anzu
     browse-kill-ring
     dash
@@ -67,6 +66,7 @@
     magit
     move-text
     operate-on-number
+    smart-mode-line
     smartparens
     smartrep
     undo-tree
