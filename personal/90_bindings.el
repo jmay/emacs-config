@@ -42,6 +42,7 @@
 (key-chord-define-global "jj" nil) ;; disable this because I use jj in ruby
 ;; (key-chord-define-global "jw" 'ace-jump-word-mode)
 ;; (key-chord-define-global "yy" 'ace-jump-word-mode)
+;; switching from ace-jump to avy (included with ace-window)
 (key-chord-define-global "jw" 'avy-goto-word-1)
 (key-chord-define-global "yy" 'avy-goto-word-1)
 
@@ -240,5 +241,13 @@
     (global-set-key (kbd "C-c C-o") 'reveal-in-finder)
     )
   )
+
+;; Default binding for toggle-frame-fullscreen is <f11>
+;; But OSX reserves f11 for hide-apps-show-desktop
+;; I don't want to steal the OS setting, so use left-command-f11.
+(global-set-key (kbd "s-<f11>") 'toggle-frame-fullscreen)
+
+(global-set-key (kbd "s-(") 'insert-parentheses)
+(global-set-key (kbd "s-9") 'insert-parentheses)
 
 ;;; 90_bindings.el ends here

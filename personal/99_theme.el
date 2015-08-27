@@ -13,6 +13,8 @@
      (load-theme 'jmay t)
      ))
 
+;; set-frame-font
+
 ;; (defadvice color-theme-alist (around sacha activate)
 ;;   (if (ad-get-arg 0)
 ;;       ad-do-it

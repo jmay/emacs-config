@@ -53,7 +53,7 @@
 
 ;; ox-md is not a package, it is in emacs core, but it must be
 ;; required to active the markdown export options in org-mode
-(require 'ox-md)
+;; rg(require 'ox-md)
 ;;(require 'Emmett-mode)
 (hlinum-activate)
 
@@ -132,5 +132,8 @@
   (mapc 'jwm-safe-load (directory-files "./pieces" 't "^[^#]*.el$")))
 
 ;; (jwm-safe-load-init-files)
+
+;; emacs should ask before carrying out C-x C-c
+(defvar confirm-kill-emacs 'yes-or-no-p)
 
 ;;; my _init.el ends here

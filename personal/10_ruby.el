@@ -1,6 +1,14 @@
 ;;; 10_ruby.el
 ;;
 ;; My personal extensions for Ruby programming
+;;
+;; What are all the ruby & dev-related modes am I using?
+;;
+;; - ruby-mode (standard)
+;; - ruby-refactor-mode: C-c C-r prefix commands; unchanged since July 2014 (diminished to blank)
+;; - subword-mode (diminished to comma): treats subwords in code as words for nav
+;; - whitespace-mode (diminished to ws): reveals loose whitespace
+;; - projectile-rails-mode
 
 (defun comment-or-uncomment-region-or-line ()
   "Comments or uncomments the region or the current line if there's no active region."
@@ -31,9 +39,13 @@
 
 ;; show fill column
 (add-hook 'prog-mode-hook 'fci-mode)
+
 ;; show line numbers
-(add-hook 'prog-mode-hook 'linum-mode)
 (setq linum-format "%4d ")
+(add-hook 'prog-mode-hook 'linum-mode)
+;; scss-mode (for CSS, SASS) is not derived from prog-mode
+(add-hook 'scss-mode-hook 'linum-mode)
+
 ;; highlight indentation
 ;; (add-hook 'prog-mode-hook 'highlight-indentation-mode)
 
