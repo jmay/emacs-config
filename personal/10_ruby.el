@@ -24,6 +24,7 @@
 
 ;; (use-package rspec-mode
 ;;   :ensure t
+;;   :ensure t
 ;;   :config
 ;;   (progn
 ;;     (eval-after-load 'rspec-mode

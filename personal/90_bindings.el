@@ -22,6 +22,7 @@
 ;;; Code:
 (setq mac-command-modifier 'super)
 (setq mac-option-modifier 'hyper)
+(setq mac-right-command-modifier 'alt)
 
 ;; command-z is Undo; make sure that command-shift-z is Redo
 (global-set-key (kbd "s-Z") 'undo-tree-redo)
@@ -32,7 +33,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Navigation
+;;; Navigation
 
 (global-set-key (read-kbd-macro "s-<down>") 'scroll-up-command)
 (global-set-key (read-kbd-macro "s-<up>") 'scroll-down-command)
@@ -60,9 +61,20 @@
 (global-set-key (kbd "M-g g") 'avy-goto-line)
 (global-set-key (kbd "s-l") 'avy-goto-line)
 
+;; http://endlessparentheses.com/improving-page-navigation.html
+(define-key prog-mode-map "\C-x\C-n" #'forward-page)
+(define-key prog-mode-map "\C-x\C-p" #'backward-page)
+
+(setq page-delimiter
+      (rx bol ";;;" (not (any "#")) (* not-newline) "\n"
+          (* (* blank) (opt ";" (* not-newline)) "\n")))
+
+;; right-command+w to select current word/sentence/para/etc for action
+(global-set-key (kbd "A-w") 'er/expand-region)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; programming
+;;; programming
 (global-set-key (kbd "C-c \\") 'comment-or-uncomment-region-or-line)
 (global-set-key (kbd "C-c ;") 'comment-or-uncomment-region-or-line)
 (global-set-key (kbd "s-/") 'comment-or-uncomment-region-or-line)
@@ -158,9 +170,19 @@
 (global-set-key (kbd "C-c q") 'compact-uncompact-block)
 
 
+(use-package org-mac-link
+  :ensure t
+  )
+
 (add-hook 'org-mode-hook
           (lambda ()
-            (define-key org-mode-map (kbd "C-c M-l") 'org-mac-grab-link)))
+            (define-key org-mode-map (kbd "C-c M-l") 'org-mac-grab-link)
+            (define-key org-mode-map (kbd "s-,") 'org-begin-template);; Command-, (no shift needed, not <)
+            )
+          )
+
+;; org-begin-template is defined in 75_org.el
+
 
 (global-set-key (kbd "C-c C-b") 'bundle-console)
 
@@ -232,6 +254,123 @@
     )
   )
 
+
+;; http://kitchingroup.cheme.cmu.edu/blog/2015/09/27/Upping-my-Emacs-navigation-game
+;; Upping my Emacs navigation game
+
+(defhydra hydra-navigate (:color red
+                          :hint nil)
+  "
+_f_: forward-char       _w_: forward-word       _n_: next-line
+_b_: backward-char      _W_: backward-word      _p_: previous-line
+^ ^                     _o_: subword-right      _,_: beginning-of-line
+^ ^                     _O_: subword-left       _._: end-of-line
+
+_s_: forward sentence   _a_: forward paragraph  _g_: forward page
+_S_: backward sentence  _A_: backward paragraph _G_: backward page
+
+_h_: helm mini _B_: buffer list _i_: window
+_<left>_: previous buffer   _<right>_: next buffer
+_<up>_: scroll-up           _<down>_: scroll-down
+
+_[_: backward-sexp _]_: forward-sexp
+_<_ beginning of buffer _>_ end of buffer _m_: set mark _/_: jump to mark
+"
+  ("f" forward-char)
+  ("b" backward-char)
+  ("w" forward-word)
+  ("W" backward-word)
+  ("n" next-line)
+  ("p" previous-line)
+  ("o" subword-right)
+  ("O" subword-left)
+  ("s" forward-sentence)
+  ("S" backward-sentence)
+  ("a" forward-paragraph)
+  ("A" backward-paragraph)
+  ("g" forward-page)
+  ("G" backward-page)
+  ("<right>" next-buffer)
+  ("<left>" previous-buffer)
+  ("h" helm-mini :color blue)
+  ("i" ace-window :color blue)
+  ("m" org-mark-ring-push)
+  ("/" org-mark-ring-goto :color blue)
+  ("B" helm-buffers-list)
+  ("<up>" scroll-up)
+  ("<down>" scroll-down)
+  ("<" beginning-of-buffer)
+  (">" end-of-buffer)
+  ("." end-of-line)
+  ("[" backward-sexp)
+  ("]" forward-sexp)
+  ("," beginning-of-line)
+  ("q" nil "quit" :color blue))
+
+(global-set-key (kbd "s-n") 'hydra-navigate/body)
+(global-set-key (kbd "A-n") 'hydra-navigate/body)
+
+
+
+;; http://kitchingroup.cheme.cmu.edu/blog/2015/09/28/A-cursor-goto-hydra-for-emacs
+;; A cursor goto hydra for emacs
+
+(defhydra goto (:color blue :hint nil)
+  "
+Goto:
+^Char^              ^Word^                ^org^                    ^search^
+^^^^^^^^---------------------------------------------------------------------------
+_c_: 2 chars        _w_: word by char     _h_: headline in buffer  _o_: helm-occur
+_C_: char           _W_: some word        _a_: heading in agenda
+_L_: char in line   _s_: subword by char  _q_: swoop org buffers   _f_: search forward
+^  ^                _S_: some subword     ^ ^                      _b_: search backward
+-----------------------------------------------------------------------------------
+_B_: helm-buffers       _l_: avy-goto-line
+_m_: helm-mini          _i_: ace-window
+_R_: helm-recentf
+
+_n_: Navigate           _._: mark position _/_: jump to mark
+"
+  ("c" avy-goto-char-2)
+  ("C" avy-goto-char)
+  ("L" avy-goto-char-in-line)
+  ("w" avy-goto-word-1)
+  ;; jump to beginning of some word
+  ("W" avy-goto-word-0)
+  ;; jump to subword starting with a char
+  ("s" avy-goto-subword-1)
+  ;; jump to some subword
+  ("S" avy-goto-subword-0)
+
+  ("l" avy-goto-line)
+  ("i" ace-window)
+
+  ("h" helm-org-headlines)
+  ("a" helm-org-agenda-files-headings)
+  ("q" helm-multi-swoop-org)
+
+  ("o" helm-occur)
+;;  ("p" swiper-helm)
+
+  ("f" isearch-forward)
+  ("b" isearch-backward)
+
+  ("." org-mark-ring-push :color red)
+  ("/" org-mark-ring-goto :color blue)
+  ("B" helm-buffers-list)
+  ("m" helm-mini)
+  ("R" helm-recentf)
+  ("n" hydra-navigate/body)
+  )
+
+(global-set-key (kbd "s-g") 'goto/body)
+(global-set-key (kbd "A-g") 'goto/body)
+
+;;
+
+
+
+
 (use-package reveal-in-finder
   :ensure t
   :config
@@ -249,5 +388,23 @@
 
 (global-set-key (kbd "s-(") 'insert-parentheses)
 (global-set-key (kbd "s-9") 'insert-parentheses)
+
+;; (define-key my-keys-minor-mode-map (kbd "C-i") 'some-function)
+
+
+;; (org mode only) key binding to insert today's date at point
+(defun org-insert-today-date ()
+  "Insert today's date in org date format."
+  (interactive)
+  (org-insert-time-stamp (current-time))
+  )
+
+(use-package org
+  :ensure t
+  :config
+  (define-key org-mode-map (kbd "C-c <") 'org-insert-today-date)
+  )
+
+(global-unset-key (kbd "C-x p"))
 
 ;;; 90_bindings.el ends here

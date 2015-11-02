@@ -1,3 +1,10 @@
+;;; jmay-theme.el --- my color scheme, cobbled together from elsewhere
+;;
+;;; Commentary:
+;;
+;; Don't remember where I found all this stuff.
+;;
+;;; Code:
 (deftheme jmay
   "Jason's personal theme")
 
@@ -5,9 +12,13 @@
  'jmay
  '(button ((t (:weight bold :underline (:color foreground-color :style line) :box (:line-width 2 :color "grey" :style released-button) :foreground "black" :background "grey" :inherit (link)))))
  '(cursor ((t (:inverse-video t :foreground "#002b36" :background "orchid"))))
- '(default ((t (:family "Source_Code_Pro" :foundry "apple" :width normal :height 140 :weight normal :slant normal :underline nil :overline nil :strike-through nil :box nil :inverse-video nil :foreground "WhiteSmoke" :background "black" :stipple nil :inherit nil))))
+
+ ;; THIS LINE CAUSES EMACS TO CRASH WHEN OPENING A FILE WITH NON-ASCII CHARACTER
+ ;; '(default ((t (:family "Source_Code_Pro" :foundry "apple" :width normal :height 140 :weight normal :slant normal :underline nil :overline nil :strike-through nil :box nil :inverse-video nil :foreground "WhiteSmoke" :background "black" :stipple nil :inherit nil))))
+
  '(escape-glyph ((((background dark)) (:foreground "cyan")) (((type pc)) (:foreground "magenta")) (t (:foreground "brown"))))
  '(fixed-pitch ((t (:family "Monospace"))))
+
  '(font-lock-builtin-face ((t (:weight bold :foreground "LightSteelBlue"))))
  '(font-lock-comment-delimiter-face ((t (:foreground "Salmon" :inherit (font-lock-comment-face)))))
  '(font-lock-comment-face ((t (:slant oblique :foreground "chocolate1"))))
@@ -34,7 +45,8 @@
  '(match ((t (:weight bold :foreground "#93a1a1" :background "RoyalBlue3"))))
  '(minibuffer-prompt ((((background dark)) (:foreground "cyan")) (((type pc)) (:foreground "magenta")) (t (:foreground "medium blue"))))
  '(mode-line ((t (:height 0.9 :box (:line-width 1 :color nil :style nil) :foreground "Blue" :background "grey75"))))
- '(mode-line-buffer-id ((t (:height 0.9 :weight bold :foreground "red" :background "grey65"))))
+ ;; ;; this background applies to the row#, filename & major-mode fields in the mode line
+ '(mode-line-buffer-id ((t (:height 0.9 :weight bold :foreground "red" :background "#7d7d7d"))))
  '(mode-line-emphasis ((t (:weight bold))))
  '(mode-line-highlight ((t (:box (:line-width 2 :color "grey40" :style released-button)))))
  '(mode-line-inactive ((t (:height 0.9 :weight light :box (:line-width 1 :color nil :style nil) :foreground "grey80" :background "grey30" :inherit (mode-line)))))
@@ -55,3 +67,5 @@
 ;;
 ;; Faces:
 ;;  *region* is the selected text
+
+;;; jmay-theme.el ends here

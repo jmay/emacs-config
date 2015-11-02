@@ -13,6 +13,10 @@
      (load-theme 'jmay t)
      ))
 
+;; http://pragmaticemacs.com/emacs/change-text-size/
+;;use larger font
+(setq default-frame-alist '((font . "Source Code Pro-14")))
+
 ;; set-frame-font
 
 ;; (defadvice color-theme-alist (around sacha activate)
