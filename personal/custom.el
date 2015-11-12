@@ -8,6 +8,7 @@
  '(org-agenda-files
    (quote
     ("~/Dropbox/Documents/Notes/veriphyr.org" "~/Dropbox/Documents/Notes/education.org" "~/Dropbox/Documents/Notes/career_personal_goals.org" "~/Dropbox/Documents/Notes/arbuelo_house_fixtures_appliances_utilities.org" "~/Dropbox/Documents/Notes/emacs-todo.org" "~/Dropbox/Documents/Notes/basis_school.org" "~/Dropbox/Documents/Notes/00 TODO & REMINDERS.org")))
+ '(org-confirm-babel-evaluate nil)
  '(org-startup-folded (quote showeverything))
  '(org-startup-indented t)
  '(paradox-github-token "c9076cfc5ad03fe402762c707549d0bf624e8a96"))

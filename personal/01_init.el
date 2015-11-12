@@ -16,6 +16,8 @@
 ;; MAYBE NOT...
 ;; (setq tags-table-list '("/Users/jmay/dev/TAGS"))
 
+(require 'use-package)
+
 ;; https://github.com/tarsius/auto-compile
 (setq load-prefer-newer t)
 (require 'auto-compile)

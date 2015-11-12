@@ -24,6 +24,20 @@
 (setq mac-option-modifier 'hyper)
 (setq mac-right-command-modifier 'alt)
 
+
+;; http://emacsformacosx.com/tips
+;; The easiest way is to use the Customize interface: "M-x customize-group RET ns RET".
+;; ns-alternate-modifier
+;; ns-command-modifier
+;; ns-control-modifier
+;; ns-function-modifier
+;; ns-option-modifier (just a different name for ns-alternate-modifier)
+;; ns-right-alternate-modifier
+;; ns-right-command-modifier
+;; ns-right-control-modifier
+;; ns-right-option-modifier
+
+
 ;; command-z is Undo; make sure that command-shift-z is Redo
 (global-set-key (kbd "s-Z") 'undo-tree-redo)
 
@@ -198,7 +212,6 @@
 (global-set-key (kbd "<A-H-left>")   'buf-move-left)
 (global-set-key (kbd "<A-H-right>")  'buf-move-right)
 
-
 ;; http://oremacs.com/2015/01/14/repeatable-commands/
 ;; http://oremacs.com/2015/01/20/introducing-hydra/
 
@@ -369,6 +382,24 @@ _n_: Navigate           _._: mark position _/_: jump to mark
 ;;
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; multiple-cursors
+
+(use-package multiple-cursors
+  :ensure t
+  :config
+  (progn
+    ;; When you have an active region that spans multiple lines, the following will add a cursor to each line:
+    (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+
+    ;; When you want to add multiple cursors not based on continuous lines, but based on keywords in the buffer, use:
+    (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+    (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+    (global-set-key (kbd "C-*") 'mc/mark-all-like-this)
+    )
+  )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 (use-package reveal-in-finder
