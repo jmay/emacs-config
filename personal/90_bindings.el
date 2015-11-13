@@ -38,28 +38,28 @@
 ;; ns-right-option-modifier
 
 
-;; command-z is Undo; make sure that command-shift-z is Redo
-(global-set-key (kbd "s-Z") 'undo-tree-redo)
-
-;; Dash
-(global-set-key (read-kbd-macro "C-c m") 'dash-at-point)
-(add-to-list 'dash-at-point-mode-alist '(perl-mode . "perl"))
+;; ;; command-z is Undo; make sure that command-shift-z is Redo
+;; (global-set-key (kbd "s-Z") 'undo-tree-redo)
+;;
+;; ;; Dash
+;; (global-set-key (read-kbd-macro "C-c m") 'dash-at-point)
+;; (add-to-list 'dash-at-point-mode-alist '(perl-mode . "perl"))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Navigation
 
-(global-set-key (read-kbd-macro "s-<down>") 'scroll-up-command)
-(global-set-key (read-kbd-macro "s-<up>") 'scroll-down-command)
-(global-set-key (read-kbd-macro "<next>") 'forward-paragraph)   ;; fn-down
-(global-set-key (read-kbd-macro "<prior>") 'backward-paragraph) ;; fn-up
+;; (global-set-key (read-kbd-macro "s-<down>") 'scroll-up-command)
+;; (global-set-key (read-kbd-macro "s-<up>") 'scroll-down-command)
+;; (global-set-key (read-kbd-macro "<next>") 'forward-paragraph)   ;; fn-down
+;; (global-set-key (read-kbd-macro "<prior>") 'backward-paragraph) ;; fn-up
 
-(key-chord-define-global "jj" nil) ;; disable this because I use jj in ruby
-;; (key-chord-define-global "jw" 'ace-jump-word-mode)
-;; (key-chord-define-global "yy" 'ace-jump-word-mode)
-;; switching from ace-jump to avy (included with ace-window)
-(key-chord-define-global "jw" 'avy-goto-word-1)
-(key-chord-define-global "yy" 'avy-goto-word-1)
+;; (key-chord-define-global "jj" nil) ;; disable this because I use jj in ruby
+;; ;; (key-chord-define-global "jw" 'ace-jump-word-mode)
+;; ;; (key-chord-define-global "yy" 'ace-jump-word-mode)
+;; ;; switching from ace-jump to avy (included with ace-window)
+;; (key-chord-define-global "jw" 'avy-goto-word-1)
+;; (key-chord-define-global "yy" 'avy-goto-word-1)
 
 ;; http://sachachua.com/blog/2014/12/emacs-kaizen-ace-jump-zap-lets-use-c-u-zap-character/
 (require 'use-package)
@@ -72,19 +72,19 @@
 ;; avy-goto-line supports letter-combo shortcuts and line numbers
 ;; http://oremacs.com/2015/05/17/avy-goto-line/
 
-(global-set-key (kbd "M-g g") 'avy-goto-line)
-(global-set-key (kbd "s-l") 'avy-goto-line)
+;; (global-set-key (kbd "M-g g") 'avy-goto-line)
+;; (global-set-key (kbd "s-l") 'avy-goto-line)
 
-;; http://endlessparentheses.com/improving-page-navigation.html
-(define-key prog-mode-map "\C-x\C-n" #'forward-page)
-(define-key prog-mode-map "\C-x\C-p" #'backward-page)
-
-(setq page-delimiter
-      (rx bol ";;;" (not (any "#")) (* not-newline) "\n"
-          (* (* blank) (opt ";" (* not-newline)) "\n")))
-
-;; right-command+w to select current word/sentence/para/etc for action
-(global-set-key (kbd "A-w") 'er/expand-region)
+;; ;; http://endlessparentheses.com/improving-page-navigation.html
+;; (define-key prog-mode-map "\C-x\C-n" #'forward-page)
+;; (define-key prog-mode-map "\C-x\C-p" #'backward-page)
+;;
+;; (setq page-delimiter
+;;       (rx bol ";;;" (not (any "#")) (* not-newline) "\n"
+;;           (* (* blank) (opt ";" (* not-newline)) "\n")))
+;;
+;; ;; right-command+w to select current word/sentence/para/etc for action
+;; (global-set-key (kbd "A-w") 'er/expand-region)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -106,29 +106,29 @@
 ;; windmove package sets shift-arrow bindings to navigate between windows,
 ;; so use Hyper key (Alt/Option) for selecting regions.
 
-(global-set-key (kbd "H-<right>") 'forward-word)
-(global-set-key (kbd "H-<left>") 'backward-word)
-(global-set-key (kbd "H-<up>") 'previous-line)
-(global-set-key (kbd "H-<down>") 'next-line)
+;; (global-set-key (kbd "H-<right>") 'forward-word)
+;; (global-set-key (kbd "H-<left>") 'backward-word)
+;; (global-set-key (kbd "H-<up>") 'previous-line)
+;; (global-set-key (kbd "H-<down>") 'next-line)
 
-(global-set-key (kbd "C-c =") 'align-to-equals)
+;; (global-set-key (kbd "C-c =") 'align-to-equals)
+;;
+;; (global-set-key (kbd "C-c y") 'browse-kill-ring)
+;;
+;;
+;; ;; I don't like these bindings; turn them off
+;; (global-unset-key (kbd "s-n"))        ; C-x 5 2 also does this
+;; (global-unset-key (kbd "C-\\"))       ; don't need emacs input methods
 
-(global-set-key (kbd "C-c y") 'browse-kill-ring)
-
-
-;; I don't like these bindings; turn them off
-(global-unset-key (kbd "s-n"))        ; C-x 5 2 also does this
-(global-unset-key (kbd "C-\\"))       ; don't need emacs input methods
-
-;; Up for consideration
-;; swap isearch-forward C-s and isearch-forward-regexp C-M-s
-;; ditto backward C-r, C-M-R
-(global-set-key (kbd "C-s") 'isearch-forward-regexp)
-(global-set-key (kbd "C-r") 'isearch-backward-regexp)
-(global-set-key (kbd "C-M-s") 'isearch-forward)
-(global-set-key (kbd "C-M-r") 'isearch-backward)
-(global-set-key (kbd "M-%") 'query-replace-regexp)
-(global-set-key (kbd "C-M-%") 'query-replace)
+;; ;; Up for consideration
+;; ;; swap isearch-forward C-s and isearch-forward-regexp C-M-s
+;; ;; ditto backward C-r, C-M-R
+;; (global-set-key (kbd "C-s") 'isearch-forward-regexp)
+;; (global-set-key (kbd "C-r") 'isearch-backward-regexp)
+;; (global-set-key (kbd "C-M-s") 'isearch-forward)
+;; (global-set-key (kbd "C-M-r") 'isearch-backward)
+;; (global-set-key (kbd "M-%") 'query-replace-regexp)
+;; (global-set-key (kbd "C-M-%") 'query-replace)
 
 
 ;;; bindings.el ends here
@@ -141,34 +141,34 @@
 ;;     (self-insert-command N)))
 ;; (global-set-key (kbd "<backtab>") 'my-unindent-region)
 
-(global-set-key (kbd "C-*") 'mc/mark-all-like-this)
-(global-set-key (kbd "H-)") 'mc/mark-next-like-this)
+;; (global-set-key (kbd "C-*") 'mc/mark-all-like-this)
+;; (global-set-key (kbd "H-)") 'mc/mark-next-like-this)
 
-(add-hook 'markdown-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-c v") 'markdown-preview-file)
-            )
-          )
+;; (add-hook 'markdown-mode-hook
+;;           (lambda ()
+;;             (local-set-key (kbd "C-c v") 'markdown-preview-file)
+;;             )
+;;           )
 
-(global-set-key (kbd "s-<right>") 'org-indent-item)
-(global-set-key (kbd "s-<left>") 'org-outdent-item)
+;; (global-set-key (kbd "s-<right>") 'org-indent-item)
+;; (global-set-key (kbd "s-<left>") 'org-outdent-item)
 
 ;; (global-set-key (kbd "C-c C-s") 'helm-spotify)
 
-(add-hook 'ruby-mode-hook
-          (lambda ()
-            (define-key ruby-mode-map (kbd "C-c C-c") 'xmp)
-            (define-key ruby-mode-map (kbd "C-c M-l") 'ruby-reload-and-go)
-            (define-key ruby-mode-map (kbd "C-\\") 'comment-or-uncomment-region-or-line)
-;;            (define-key rspec-mode-keymap (kbd "s") 'rspec-verify-single)
-            ))
-;; ruby-refactor adds C-c C-r keymap with {e, v, c, p, l}
-
-
-;; easy-kill - this is already defined by prelude
-;; (global-set-key [remap kill-ring-save] 'easy-kill)
-
-(global-set-key (kbd "M-u") 'upcase-region-or-word)
+;; (add-hook 'ruby-mode-hook
+;;           (lambda ()
+;;             (define-key ruby-mode-map (kbd "C-c C-c") 'xmp)
+;;             (define-key ruby-mode-map (kbd "C-c M-l") 'ruby-reload-and-go)
+;;             (define-key ruby-mode-map (kbd "C-\\") 'comment-or-uncomment-region-or-line)
+;; ;;            (define-key rspec-mode-keymap (kbd "s") 'rspec-verify-single)
+;;             ))
+;; ;; ruby-refactor adds C-c C-r keymap with {e, v, c, p, l}
+;;
+;;
+;; ;; easy-kill - this is already defined by prelude
+;; ;; (global-set-key [remap kill-ring-save] 'easy-kill)
+;;
+;; (global-set-key (kbd "M-u") 'upcase-region-or-word)
 
 ;; other candidate keys for rebinding
 ;; C-z (default is suspend-frame)
@@ -179,38 +179,38 @@
 ;;
 ;;(global-set-key (kbd "C-x o") 'switch-window)
 
-(global-set-key (kbd "M-p") 'ace-window)
+;; (global-set-key (kbd "M-p") 'ace-window)
+;;
+;; (global-set-key (kbd "C-c q") 'compact-uncompact-block)
 
-(global-set-key (kbd "C-c q") 'compact-uncompact-block)
 
-
-(use-package org-mac-link
-  :ensure t
-  )
-
-(add-hook 'org-mode-hook
-          (lambda ()
-            (define-key org-mode-map (kbd "C-c M-l") 'org-mac-grab-link)
-            (define-key org-mode-map (kbd "s-,") 'org-begin-template);; Command-, (no shift needed, not <)
-            )
-          )
+;; (use-package org-mac-link
+;;   :ensure t
+;;   )
+;;
+;; (add-hook 'org-mode-hook
+;;           (lambda ()
+;;             (define-key org-mode-map (kbd "C-c M-l") 'org-mac-grab-link)
+;;             (define-key org-mode-map (kbd "s-,") 'org-begin-template);; Command-, (no shift needed, not <)
+;;             )
+;;           )
 
 ;; org-begin-template is defined in 75_org.el
 
 
-(global-set-key (kbd "C-c C-b") 'bundle-console)
+;; (global-set-key (kbd "C-c C-b") 'bundle-console)
+;;
+;; (global-set-key (kbd "C-c M-q") 'toggle-fill-unfill)
 
-(global-set-key (kbd "C-c M-q") 'toggle-fill-unfill)
-
-;; navigating between buffers
-;; windmove moves the cursor; buf-move swaps entire buffers
-(global-set-key (kbd "<A-left>")   'windmove-left)
-(global-set-key (kbd "<A-right>")  'windmove-right)
-(global-set-key (kbd "<A-up>")  'windmove-up)
-(global-set-key (kbd "<A-down>")  'windmove-down)
-
-(global-set-key (kbd "<A-H-left>")   'buf-move-left)
-(global-set-key (kbd "<A-H-right>")  'buf-move-right)
+;; ;; navigating between buffers
+;; ;; windmove moves the cursor; buf-move swaps entire buffers
+;; (global-set-key (kbd "<A-left>")   'windmove-left)
+;; (global-set-key (kbd "<A-right>")  'windmove-right)
+;; (global-set-key (kbd "<A-up>")  'windmove-up)
+;; (global-set-key (kbd "<A-down>")  'windmove-down)
+;;
+;; (global-set-key (kbd "<A-H-left>")   'buf-move-left)
+;; (global-set-key (kbd "<A-H-right>")  'buf-move-right)
 
 ;; http://oremacs.com/2015/01/14/repeatable-commands/
 ;; http://oremacs.com/2015/01/20/introducing-hydra/

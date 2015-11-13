@@ -615,6 +615,25 @@ Return output file's name."
             (kbd "C-c 0") 'mwp-org-html-to-tmp)
 #+END_SRC
 
+** Theme
+
+I prefer a larger font to the default.
+
+#+BEGIN_SRC elisp
+(setq default-frame-alist '((font . "Source Code Pro-14")))
+#+END_SRC
+
+This is my old personal theme. Probably want to nuke this and go with
+a standard theme.
+
+#+BEGIN_SRC elisp :tangle no
+(if (eq (window-system) 'ns)
+    (progn
+     (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+     (load-theme 'jmay t)
+     ))
+#+END_SRC
+
 ** Disabled packages
 
 #+BEGIN_SRC elisp :tangle no
@@ -626,6 +645,21 @@ Return output file's name."
 #+END_SRC
 
 ** Under consideration
+
+Having problems with this: hanging when trying to transfer a link from
+Chrome.
+
+#+BEGIN_SRC elisp :tangle no
+(use-package org-mac-link
+  :ensure t
+  )
+(add-hook 'org-mode-hook
+          (lambda ()
+            (define-key org-mode-map (kbd "C-c M-l") 'org-mac-grab-link)
+            (define-key org-mode-map (kbd "s-,") 'org-begin-template);; Command-, (no shift needed, not <)
+            )
+          )
+#+END_SRC
 
 *** TODO [[http://matt.hackinghistory.ca/2015/11/11/note-taking-with-pdf-tools/][NOTE TAKING WITH PDF TOOLS]]
 
@@ -654,4 +688,197 @@ Return output file's name."
   (mapc 'jwm-safe-load (directory-files "./pieces" 't "^[^#]*.el$")))
 
 ;; (jwm-safe-load-init-files)
+#+END_SRC
+
+** Keyboard Bindings
+
+*** modifier key mappings for MacOSX
+
+- https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html
+- http://ergoemacs.org/emacs/keyboard_shortcuts.html
+- http://emacsformacosx.com/tips
+
+"Sequences consisting of C-c and a letter (either upper or lower case) are reserved for users"
+
+For multi-modifier combinations, write the modifiers in alphabetical order (C-H-M-s-S)
+
+- Emacs understands Shift (S-), Control (C-), Meta (M-), Super (s-), Hyper (H-)
+- control key is Control
+- both shift keys are Shift
+- escape key is Meta
+- OSX fn key is Hyper
+- I prefer the following: option/alt key is Hyper, command key is Super
+
+The easiest way is to use the Customize interface: "M-x
+customize-group RET ns RET".
+
+- ns-alternate-modifier
+- ns-command-modifier
+- ns-control-modifier
+- ns-function-modifier
+- ns-option-modifier (just a different name for ns-alternate-modifier)
+- ns-right-alternate-modifier
+- ns-right-command-modifier
+- ns-right-control-modifier
+- ns-right-option-modifier
+
+#+BEGIN_SRC elisp
+(setq mac-command-modifier 'super)
+(setq mac-option-modifier 'hyper)
+(setq mac-right-command-modifier 'alt)
+#+END_SRC
+
+** Global mappings
+
+Command-z is Undo; make sure that Command-Shift-z is Redo
+
+#+BEGIN_SRC elisp
+(global-set-key (kbd "s-Z") 'undo-tree-redo)
+#+END_SRC
+
+** Navigation
+
+#+BEGIN_SRC elisp
+(global-set-key (read-kbd-macro "s-<down>") 'scroll-up-command)
+(global-set-key (read-kbd-macro "s-<up>") 'scroll-down-command)
+(global-set-key (read-kbd-macro "<next>") 'forward-paragraph)   ;; fn-down
+(global-set-key (read-kbd-macro "<prior>") 'backward-paragraph) ;; fn-up
+
+;; windmove package sets shift-arrow bindings to navigate between windows,
+;; so use Hyper key (Alt/Option) for selecting regions.
+
+(global-set-key (kbd "H-<right>") 'forward-word)
+(global-set-key (kbd "H-<left>") 'backward-word)
+(global-set-key (kbd "H-<up>") 'previous-line)
+(global-set-key (kbd "H-<down>") 'next-line)
+
+;; navigating between buffers
+;; windmove moves the cursor; buf-move swaps entire buffers
+(global-set-key (kbd "<A-left>")   'windmove-left)
+(global-set-key (kbd "<A-right>")  'windmove-right)
+(global-set-key (kbd "<A-up>")  'windmove-up)
+(global-set-key (kbd "<A-down>")  'windmove-down)
+
+(global-set-key (kbd "<A-H-left>")   'buf-move-left)
+(global-set-key (kbd "<A-H-right>")  'buf-move-right)
+
+
+(global-set-key (kbd "M-p") 'ace-window)
+
+;; Search
+;; Up for consideration:
+;; swap isearch-forward C-s and isearch-forward-regexp C-M-s
+;; ditto backward C-r, C-M-R
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "C-M-s") 'isearch-forward)
+(global-set-key (kbd "C-M-r") 'isearch-backward)
+(global-set-key (kbd "M-%") 'query-replace-regexp)
+(global-set-key (kbd "C-M-%") 'query-replace)
+
+;; avy-goto-line supports letter-combo shortcuts and line numbers
+;; http://oremacs.com/2015/05/17/avy-goto-line/
+
+(global-set-key (kbd "M-g g") 'avy-goto-line)
+(global-set-key (kbd "s-l") 'avy-goto-line)
+
+;; http://endlessparentheses.com/improving-page-navigation.html
+(define-key prog-mode-map "\C-x\C-n" #'forward-page)
+(define-key prog-mode-map "\C-x\C-p" #'backward-page)
+
+(setq page-delimiter
+      (rx bol ";;;" (not (any "#")) (* not-newline) "\n"
+          (* (* blank) (opt ";" (* not-newline)) "\n")))
+
+#+END_SRC
+
+Navigation hydras
+
+#+BEGIN_SRC elisp
+
+#+END_SRC
+
+
+** Selection
+
+right-command+w to select current word/sentence/para/etc for action
+
+#+BEGIN_SRC elisp
+(global-set-key (kbd "A-w") 'er/expand-region)
+#+END_SRC
+
+** Programming
+
+#+BEGIN_SRC elisp
+(global-set-key (kbd "C-c \\") 'comment-or-uncomment-region-or-line)
+(global-set-key (kbd "C-c ;") 'comment-or-uncomment-region-or-line)
+(global-set-key (kbd "s-/") 'comment-or-uncomment-region-or-line)
+
+(global-set-key (kbd "C-c q") 'compact-uncompact-block)
+
+(global-set-key (kbd "M-u") 'upcase-region-or-word)
+
+(global-set-key (kbd "C-c M-q") 'toggle-fill-unfill)
+
+;; todo, notes, journal
+(global-set-key (kbd "C-c j") 'org-capture)
+(global-set-key (kbd "C-c c") 'org-capture)
+
+(global-set-key (kbd "s-<right>") 'org-indent-item)
+(global-set-key (kbd "s-<left>") 'org-outdent-item)
+
+
+(global-set-key (kbd "C-c b") 'browse-url-at-point)
+
+(global-set-key (kbd "s-C") 'my-copy-simple)
+
+(global-set-key (kbd "C-c =") 'align-to-equals)
+
+(global-set-key (kbd "C-c y") 'browse-kill-ring)
+
+;; I don't like these bindings; turn them off
+(global-unset-key (kbd "s-n"))        ; C-x 5 2 also does this
+(global-unset-key (kbd "C-\\"))       ; don't need emacs input methods
+
+(global-set-key (kbd "C-*") 'mc/mark-all-like-this)
+(global-set-key (kbd "H-)") 'mc/mark-next-like-this)
+
+(add-hook 'markdown-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c v") 'markdown-preview-file)
+            )
+          )
+
+(add-hook 'ruby-mode-hook
+          (lambda ()
+            (define-key ruby-mode-map (kbd "C-c C-c") 'xmp)
+            (define-key ruby-mode-map (kbd "C-c M-l") 'ruby-reload-and-go)
+            (define-key ruby-mode-map (kbd "C-\\") 'comment-or-uncomment-region-or-line)
+;;            (define-key rspec-mode-keymap (kbd "s") 'rspec-verify-single)
+            ))
+;; ruby-refactor adds C-c C-r keymap with {e, v, c, p, l}
+
+(global-set-key (kbd "C-c C-b") 'bundle-console)
+#+END_SRC
+
+** Disabled
+
+Navigation with key chords. I think I prefer the hydra approach.
+
+#+BEGIN_SRC elisp
+(key-chord-define-global "jj" nil) ;; disable this because I use jj in ruby
+;; (key-chord-define-global "jw" 'ace-jump-word-mode)
+;; (key-chord-define-global "yy" 'ace-jump-word-mode)
+;; switching from ace-jump to avy (included with ace-window)
+(key-chord-define-global "jw" 'avy-goto-word-1)
+(key-chord-define-global "yy" 'avy-goto-word-1)
+#+END_SRC
+
+
+Having lots of problems with Dash. Re-enable these when issues are
+resolved.
+
+#+BEGIN_SRC elisp :tangle no
+(global-set-key (read-kbd-macro "C-c m") 'dash-at-point)
+(add-to-list 'dash-at-point-mode-alist '(perl-mode . "perl"))
 #+END_SRC
