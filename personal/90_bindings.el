@@ -165,8 +165,8 @@
 ;; ruby-refactor adds C-c C-r keymap with {e, v, c, p, l}
 
 
-;; easy-kill
-(global-set-key [remap kill-ring-save] 'easy-kill)
+;; easy-kill - this is already defined by prelude
+;; (global-set-key [remap kill-ring-save] 'easy-kill)
 
 (global-set-key (kbd "M-u") 'upcase-region-or-word)
 

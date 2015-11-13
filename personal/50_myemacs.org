@@ -15,6 +15,31 @@ Some references:
 (require 'use-package)
 #+END_SRC
 
+** General settings
+
+#+BEGIN_SRC elisp
+(require 'use-package)
+
+;; emacs should ask before carrying out C-x C-c
+(defvar confirm-kill-emacs 'yes-or-no-p)
+
+;; default value of 'midnight-hook is 'clean-buffer-list
+;; I do not want emacs to close all my buffers every night
+(remove-hook 'midnight-hook 'clean-buffer-list)
+
+(setq prelude-guru nil)                 ; enable keyboard arrow keys for navigation
+
+(use-package auto-compile
+  :ensure t
+  :init
+    (setq load-prefer-newer t)
+  :config
+    (progn
+      (auto-compile-on-load-mode 1)
+      (auto-compile-on-save-mode 1)
+    ))
+#+END_SRC
+
 ** Markdown editing & preview
 
 #+BEGIN_SRC elisp :results silent
@@ -32,19 +57,32 @@ Some references:
 *** minor modes
 
 #+BEGIN_SRC elisp
-;; show fill column
-(add-hook 'prog-mode-hook 'fci-mode)
+  ;; show fill column
+  (add-hook 'prog-mode-hook 'fci-mode)
 
-;; show line numbers
-(setq linum-format "%4d ")
-(add-hook 'prog-mode-hook 'linum-mode)
-;; scss-mode (for CSS, SASS) is not derived from prog-mode
-(add-hook 'scss-mode-hook 'linum-mode)
+  ;; show line numbers
+  (setq linum-format "%4d ")
+  (add-hook 'prog-mode-hook 'linum-mode)
+  ;; scss-mode (for CSS, SASS) is not derived from prog-mode
+  (add-hook 'scss-mode-hook 'linum-mode)
+
+  ;; use markdown-mode for .txt files
+  (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
+  ;; j2-mode for .es6 files
+  (add-to-list 'auto-mode-alist '("\\.es6\\'" . js2-mode))
+
+  (use-package hlinum
+    :ensure t
+    :config
+    (hlinum-activate)
+    )
 #+END_SRC
 
 *** development settings
 
 #+BEGIN_SRC elisp
+(setq whitespace-line-column 100)
+
 (setq comment-empty-lines t)
 
 (defun align-to-equals (begin end)
@@ -76,9 +114,15 @@ This functions should be added to the hooks of major modes for programming."
 
 (add-hook 'prog-mode-hook 'font-lock-comment-annotations)
 
-(require 'auto-complete-config)
-(ac-config-default)
-(define-key ac-mode-map (kbd "C-c ,") 'auto-complete)
+(use-package auto-complete
+  :ensure t
+  :config
+  (progn
+    (require 'auto-complete-config)
+    (ac-config-default)
+    (define-key ac-mode-map (kbd "C-c ,") 'auto-complete)
+  )
+)
 #+END_SRC
 
 *** [[https://github.com/purcell/ruby-hash-syntax][ruby-hash-syntax]]
@@ -100,7 +144,11 @@ Toggle ruby hash syntax between classic and 1.9 styles.
 - projectile-rails-mode
 
 #+BEGIN_SRC elisp
-(add-hook 'ruby-mode-hook 'ruby-refactor-mode-launch)
+(use-package ruby-refactor
+  :ensure t
+  :config
+  (add-hook 'ruby-mode-hook 'ruby-refactor-mode-launch)
+)
 
 ;; inferior ruby
 (defun ruby-reload-and-go ()
@@ -173,7 +221,7 @@ Commenting code
 #+END_SRC
 ** Copy region without newlines
 
-- [[Copy region from emacs without newlines][my stackexchange post]]
+- [[https://emacs.stackexchange.com/questions/1051/copy-region-from-emacs-without-newlines][my stackexchange post]]
 - [[https://gist.github.com/xahlee/d364cbbff9b3abd12d29][improved version from Xah Lee]]
 
 #+BEGIN_SRC elisp
@@ -278,235 +326,299 @@ When there is a text selection, act on the region."
             (toggle-truncate-lines t)))
 #+END_SRC
 
-** All my org-mode stuff
+** COMMENT All my org-mode stuff
 
 #+BEGIN_SRC elisp
-;; configuration for org mode, todo & journal capture
-;;
-;; Reference:
-;;
-;; https://www.gnu.org/software/emacs/manual/html_node/org/Template-expansion.html
-;; http://members.optusnet.com.au/~charles57/GTD/datetree.html
-;; https://www.gnu.org/software/emacs/manual/html_node/org/Conflicts.html
+  ;; configuration for org mode, todo & journal capture
+  ;;
+  ;; Reference:
+  ;;
+  ;; https://www.gnu.org/software/emacs/manual/html_node/org/Template-expansion.html
+  ;; http://members.optusnet.com.au/~charles57/GTD/datetree.html
+  ;; https://www.gnu.org/software/emacs/manual/html_node/org/Conflicts.html
 
-(setq org-export-with-smart-quotes t)
+  (setq org-export-with-smart-quotes t)
 
-;; Make windmove work in org-mode:
-(add-hook 'org-shiftup-final-hook 'windmove-up)
-(add-hook 'org-shiftleft-final-hook 'windmove-left)
-(add-hook 'org-shiftdown-final-hook 'windmove-down)
-(add-hook 'org-shiftright-final-hook 'windmove-right)
+  ;; Make windmove work in org-mode:
+  (add-hook 'org-shiftup-final-hook 'windmove-up)
+  (add-hook 'org-shiftleft-final-hook 'windmove-left)
+  (add-hook 'org-shiftdown-final-hook 'windmove-down)
+  (add-hook 'org-shiftright-final-hook 'windmove-right)
 
-;; (setq org-default-notes-file "~/.deft/notes.org")
+  ;; (setq org-default-notes-file "~/.deft/notes.org")
 
-;; force UTF-8
-(setq org-export-coding-system 'utf-8)
+  ;; force UTF-8
+  (setq org-export-coding-system 'utf-8)
 
-(setq org-capture-templates
-      '(
-        ("t"
-         "TODO"
-         entry
-         (file+headline "~/.deft/gtd.org" "Tasks")
-         "* TODO %?\n  %i\n  %a")
-        ("o"
-         "Otherbase TODO"
-         entry
-         (file+headline "~/.deft/otherbase-todo.org" "Tasks")
-         "* TODO %?\n  %i\n")
-        ("v"
-         "Veriphyr TODO"
-         entry
-         (file+headline "~/.deft/veriphyr-todo.org" "Tasks")
-         "* TODO %?\n  %i\n")
-        ("e"
-         "Emacs TODO"
-         entry
-         (file+headline "~/.deft/emacs-todo.org" "Emacs TODO")
-         "* TODO %?\n  %i\n")
-        ("j"
-         "Journal"
-         entry
-         (file+datetree "~/.deft/journal.org")
-         "* %?\n%i\n")
-        ("s"
-         "Schoolistry Journal"
-         entry
-         (file+datetree "~/.deft/journal.org")
-         "* %? :schoolistry:\n%i\n")
+  (setq org-capture-templates
+        '(
+          ("t"
+           "TODO"
+           entry
+           (file+headline "~/.deft/gtd.org" "Tasks")
+           "* TODO %?\n  %i\n  %a")
+          ("o"
+           "Otherbase TODO"
+           entry
+           (file+headline "~/.deft/otherbase-todo.org" "Tasks")
+           "* TODO %?\n  %i\n")
+          ("v"
+           "Veriphyr TODO"
+           entry
+           (file+headline "~/.deft/veriphyr-todo.org" "Tasks")
+           "* TODO %?\n  %i\n")
+          ("e"
+           "Emacs TODO"
+           entry
+           (file+headline "~/.deft/emacs-todo.org" "Emacs TODO")
+           "* TODO %?\n  %i\n")
+          ("j"
+           "Journal"
+           entry
+           (file+datetree "~/.deft/journal.org")
+           "* %?\n%i\n")
+          ("s"
+           "Schoolistry Journal"
+           entry
+           (file+datetree "~/.deft/journal.org")
+           "* %? :schoolistry:\n%i\n")
+          )
         )
+
+  ;; using deft with org-mode
+
+  ;; (when (require 'deft nil 'noerror)
+  ;;   (setq
+  ;; ;;   deft-extension "org"
+  ;;    deft-directory "~/.deft"
+  ;;    deft-text-mode 'org-mode
+  ;;    deft-auto-save-interval 0
+  ;;   )
+  ;;   (global-set-key (kbd "<f9>") 'deft))
+
+  ;; 130718 currently I don't like the deft auto-save because it triggers whitespace-cleanup
+  ;; couldn't turn it off once Deft has been loaded, needed to do this:
+  ;; (cancel-function-timers 'deft-auto-save)
+
+  ;; http://www.emacswiki.org/emacs/AutoFillMode
+  (add-hook 'text-mode-hook 'turn-on-auto-fill)
+  (add-hook 'org-mode-hook 'turn-on-auto-fill)
+  (add-hook 'markdown-mode-hook 'turn-on-auto-fill)
+
+  ;; for MobileOrg
+  (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
+  (setq org-directory "~/Dropbox/Apps/MobileOrg")
+
+
+  (defun my-org-export-change-options (plist backend)
+    (cond
+     ((equal backend 'html)
+      (plist-put plist :with-toc nil)
+      (plist-put plist :section-numbers t))
+     ((equal backend 'md)
+      (plist-put plist :with-toc nil)
+      (plist-put plist :section-numbers nil)))
+    plist)
+
+  ;; (add-to-list 'org-export-filter-options-functions 'my-org-export-change-options)
+
+
+  ;; idea for how to completely conceal/reveal the PROPERTIES blocks
+  ;; https://stackoverflow.com/questions/17478260/completely-hide-the-properties-drawer-in-org-mode
+  ;; (defun lawlist-org-cycle-hide-drawers (state)
+  ;;   "Re-hide all drawers after a visibility state change."
+  ;;   (when (and (derived-mode-p 'org-mode)
+  ;;        (not (memq state '(overview folded contents))))
+  ;;     (save-excursion
+  ;;       (let* ((globalp (memq state '(contents all)))
+  ;;              (beg (if globalp (point-min) (point)))
+  ;;              (end (if globalp (point-max)
+  ;;         (if (eq state 'children)
+  ;;       (save-excursion (outline-next-heading) (point))
+  ;;           (org-end-of-subtree t)))))
+  ;;   (goto-char beg)
+  ;;   (while (re-search-forward "^.*DEADLINE:.*$\\|^\\*\\* Someday.*$\\|^\\*\\* None.*$\\|^\\*\\* Planning.*$\\|^\\* TASKS.*$" end t)
+  ;;      (save-excursion
+  ;;     (beginning-of-line 1)
+  ;;     (when (looking-at "^.*DEADLINE:.*$\\|^\\*\\* Someday.*$\\|^\\*\\* None.*$\\|^\\*\\* Planning.*$\\|^\\* TASKS.*$")
+  ;;       (let ((b (match-end 0)))
+  ;;   (if (re-search-forward
+  ;;        "^[ \t]*:END:"
+  ;;        (save-excursion (outline-next-heading) (point)) t)
+  ;;       (outline-flag-region b (point-at-eol) t)
+  ;;     (user-error ":END: line missing at position %s" b))))))))))
+
+  ;; fontify code in code blocks
+  (setq org-src-fontify-natively t)
+
+  (use-package org-bullets
+    :ensure t
+    :config
+    (progn
+      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
       )
-
-;; using deft with org-mode
-
-;; (when (require 'deft nil 'noerror)
-;;   (setq
-;; ;;   deft-extension "org"
-;;    deft-directory "~/.deft"
-;;    deft-text-mode 'org-mode
-;;    deft-auto-save-interval 0
-;;   )
-;;   (global-set-key (kbd "<f9>") 'deft))
-
-;; 130718 currently I don't like the deft auto-save because it triggers whitespace-cleanup
-;; couldn't turn it off once Deft has been loaded, needed to do this:
-;; (cancel-function-timers 'deft-auto-save)
-
-;; http://www.emacswiki.org/emacs/AutoFillMode
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
-(add-hook 'org-mode-hook 'turn-on-auto-fill)
-(add-hook 'markdown-mode-hook 'turn-on-auto-fill)
-
-;; for MobileOrg
-(setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
-(setq org-directory "~/Dropbox/Apps/MobileOrg")
-
-
-(defun my-org-export-change-options (plist backend)
-  (cond
-   ((equal backend 'html)
-    (plist-put plist :with-toc nil)
-    (plist-put plist :section-numbers t))
-   ((equal backend 'md)
-    (plist-put plist :with-toc nil)
-    (plist-put plist :section-numbers nil)))
-  plist)
-
-;; (add-to-list 'org-export-filter-options-functions 'my-org-export-change-options)
-
-
-;; idea for how to completely conceal/reveal the PROPERTIES blocks
-;; https://stackoverflow.com/questions/17478260/completely-hide-the-properties-drawer-in-org-mode
-;; (defun lawlist-org-cycle-hide-drawers (state)
-;;   "Re-hide all drawers after a visibility state change."
-;;   (when (and (derived-mode-p 'org-mode)
-;;        (not (memq state '(overview folded contents))))
-;;     (save-excursion
-;;       (let* ((globalp (memq state '(contents all)))
-;;              (beg (if globalp (point-min) (point)))
-;;              (end (if globalp (point-max)
-;;         (if (eq state 'children)
-;;       (save-excursion (outline-next-heading) (point))
-;;           (org-end-of-subtree t)))))
-;;   (goto-char beg)
-;;   (while (re-search-forward "^.*DEADLINE:.*$\\|^\\*\\* Someday.*$\\|^\\*\\* None.*$\\|^\\*\\* Planning.*$\\|^\\* TASKS.*$" end t)
-;;      (save-excursion
-;;     (beginning-of-line 1)
-;;     (when (looking-at "^.*DEADLINE:.*$\\|^\\*\\* Someday.*$\\|^\\*\\* None.*$\\|^\\*\\* Planning.*$\\|^\\* TASKS.*$")
-;;       (let ((b (match-end 0)))
-;;   (if (re-search-forward
-;;        "^[ \t]*:END:"
-;;        (save-excursion (outline-next-heading) (point)) t)
-;;       (outline-flag-region b (point-at-eol) t)
-;;     (user-error ":END: line missing at position %s" b))))))))))
-
-;; fontify code in code blocks
-(setq org-src-fontify-natively t)
-
-(use-package org-bullets
-  :ensure t
-  :config
-  (progn
-    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
     )
-  )
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; install sql (includes postgresql) support for org-babel
-;; http://orgmode.org/worg/org-contrib/babel/languages/ob-doc-sql.html
-;; active Babel languages
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((sql . t)
-   (sh . t)
-   (python . t)))
-;; add additional languages with '((language . t)))
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; install sql (includes postgresql) support for org-babel
+  ;; http://orgmode.org/worg/org-contrib/babel/languages/ob-doc-sql.html
+  ;; active Babel languages
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((sql . t)
+     (sh . t)
+     (python . t)))
+  ;; add additional languages with '((language . t)))
 
-(defun babel-confirm (flag)
-  "Report the setting of org-confirm-babel-evaluate.
-If invoked with C-u, toggle the setting"
-  (interactive "P")
-  (if (equal flag '(4))
-      (setq org-confirm-babel-evaluate (not org-confirm-babel-evaluate)))
-  (message "Babel evaluation confirmation is %s"
-           (if org-confirm-babel-evaluate "on" "off")))
+  (defun babel-confirm (flag)
+    "Report the setting of org-confirm-babel-evaluate.
+  If invoked with C-u, toggle the setting"
+    (interactive "P")
+    (if (equal flag '(4))
+        (setq org-confirm-babel-evaluate (not org-confirm-babel-evaluate)))
+    (message "Babel evaluation confirmation is %s"
+             (if org-confirm-babel-evaluate "on" "off")))
 
-;; (org-add-link-type
-;;  "yt"
-;;  (lambda (handle)
-;;    (browse-url (concat "https://www.youtube.com/embed/" handle)))
-;;  (lambda (path desc backend)
-;;    (cl-case backend
-;;      ;; You may want to change your width and height.
-;;      (html (format "<iframe width=\"440\" height=\"335\" src=\"https://www.youtube.com/embed/%s\" frameborder=\"0\" allowfullscreen>%s</iframe>"
-;;                    path (or desc "")))
-;;      (latex (format "\href{%s}{%s}" path (or desc "video"))))))
+  ;; (org-add-link-type
+  ;;  "yt"
+  ;;  (lambda (handle)
+  ;;    (browse-url (concat "https://www.youtube.com/embed/" handle)))
+  ;;  (lambda (path desc backend)
+  ;;    (cl-case backend
+  ;;      ;; You may want to change your width and height.
+  ;;      (html (format "<iframe width=\"440\" height=\"335\" src=\"https://www.youtube.com/embed/%s\" frameborder=\"0\" allowfullscreen>%s</iframe>"
+  ;;                    path (or desc "")))
+  ;;      (latex (format "\href{%s}{%s}" path (or desc "video"))))))
 
-(use-package org-download
-  :ensure t)
+  (use-package org-download
+    :ensure t)
 
-;; Turn off ispell checking inside org mode source blocks
-;; NOT WORKING ON 150824
-;; http://endlessparentheses.com/ispell-and-org-mode.html
-;; (defun endless/org-ispell ()
-;;   "Configure `ispell-skip-region-alist' for `org-mode'."
-;;   (make-local-variable 'ispell-skip-region-alist)
-;;   (add-to-list 'ispell-skip-region-alist '(org-property-drawer-re))
-;;   (add-to-list 'ispell-skip-region-alist '("~" "~"))
-;;   (add-to-list 'ispell-skip-region-alist '("=" "="))
-;;   (add-to-list 'ispell-skip-region-alist '("^#\\+BEGIN_SRC" . "^#\\+END_SRC")))
-;; (add-hook 'org-mode-hook #'endless/org-ispell)
+  ;; Turn off ispell checking inside org mode source blocks
+  ;; NOT WORKING ON 150824
+  ;; http://endlessparentheses.com/ispell-and-org-mode.html
+  ;; (defun endless/org-ispell ()
+  ;;   "Configure `ispell-skip-region-alist' for `org-mode'."
+  ;;   (make-local-variable 'ispell-skip-region-alist)
+  ;;   (add-to-list 'ispell-skip-region-alist '(org-property-drawer-re))
+  ;;   (add-to-list 'ispell-skip-region-alist '("~" "~"))
+  ;;   (add-to-list 'ispell-skip-region-alist '("=" "="))
+  ;;   (add-to-list 'ispell-skip-region-alist '("^#\\+BEGIN_SRC" . "^#\\+END_SRC")))
+  ;; (add-hook 'org-mode-hook #'endless/org-ispell)
 
-(setq org-imenu-depth 4)
+  (setq org-imenu-depth 4)
 
 
-;; http://pragmaticemacs.com/emacs/wrap-text-in-an-org-mode-block/
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; function to wrap blocks of text in org templates                       ;;
-;; e.g. latex or src etc                                                  ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defun org-begin-template ()
-  "Make a template at point."
+  ;; http://pragmaticemacs.com/emacs/wrap-text-in-an-org-mode-block/
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; function to wrap blocks of text in org templates                       ;;
+  ;; e.g. latex or src etc                                                  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (defun org-begin-template ()
+    "Make a template at point."
+    (interactive)
+    (if (org-at-table-p)
+        (call-interactively 'org-table-rotate-recalc-marks)
+      (let* ((choices '(("s" . "SRC")
+                        ("e" . "EXAMPLE")
+                        ("q" . "QUOTE")
+                        ("v" . "VERSE")
+                        ("c" . "CENTER")
+                        ("l" . "LaTeX")
+                        ("h" . "HTML")
+                        ("a" . "ASCII")))
+             (key
+              (key-description
+               (vector
+                (read-key
+                 (concat (propertize "Template type: " 'face 'minibuffer-prompt)
+                         (mapconcat (lambda (choice)
+                                      (concat (propertize (car choice) 'face 'font-lock-type-face)
+                                              ": "
+                                              (cdr choice)))
+                                    choices
+                                    ", ")))))))
+        (let ((result (assoc key choices)))
+          (when result
+            (let ((choice (cdr result)))
+              (cond
+               ((region-active-p)
+                (let ((start (region-beginning))
+                      (end (region-end)))
+                  (goto-char end)
+                  (insert "#+END_" choice "\n")
+                  (goto-char start)
+                  (insert "#+BEGIN_" choice "\n")))
+               (t
+                (insert "#+BEGIN_" choice "\n")
+                (save-excursion (insert "#+END_" choice))))))))))
+
+
+  ;; http://endlessparentheses.com/changing-the-org-mode-ellipsis.html
+  (setq org-ellipsis "⤵")
+
+#+END_SRC
+
+** org mode stuff
+
+- [[http://matt.hackinghistory.ca/2015/07/11/temporary-exporting/][EXPORTING ORG-FILES TO A TEMPORARY LOCATION]] (Matt Price)
+
+This needs work. The path is hard-coded. And the highlight-indentation
+settings are somehow being transmitted through to the HTML export.
+
+#+BEGIN_SRC elisp
+;; export html to tmp dir
+(defun mwp-org-html-to-tmp
+    (&optional async subtreep visible-only body-only ext-plist)
+  "Export current buffer to a HTML file in the tmp directory.
+
+If narrowing is active in the current buffer, only export its
+narrowed part.
+
+If a region is active, export that region.
+
+A non-nil optional argument ASYNC means the process should happen
+asynchronously.  The resulting file should be accessible through
+the `org-export-stack' interface.
+
+When optional argument SUBTREEP is non-nil, export the sub-tree
+at point, extracting information from the headline properties
+first.
+
+When optional argument VISIBLE-ONLY is non-nil, don't export
+contents of hidden elements.
+
+When optional argument BODY-ONLY is non-nil, only write code
+between \"<body>\" and \"</body>\" tags.
+
+
+EXT-PLIST, when provided, is a property list with external
+parameters overriding Org default settings, but still inferior to
+file-local settings.
+
+Return output file's name."
   (interactive)
-  (if (org-at-table-p)
-      (call-interactively 'org-table-rotate-recalc-marks)
-    (let* ((choices '(("s" . "SRC")
-                      ("e" . "EXAMPLE")
-                      ("q" . "QUOTE")
-                      ("v" . "VERSE")
-                      ("c" . "CENTER")
-                      ("l" . "LaTeX")
-                      ("h" . "HTML")
-                      ("a" . "ASCII")))
-           (key
-            (key-description
-             (vector
-              (read-key
-               (concat (propertize "Template type: " 'face 'minibuffer-prompt)
-                       (mapconcat (lambda (choice)
-                                    (concat (propertize (car choice) 'face 'font-lock-type-face)
-                                            ": "
-                                            (cdr choice)))
-                                  choices
-                                  ", ")))))))
-      (let ((result (assoc key choices)))
-        (when result
-          (let ((choice (cdr result)))
-            (cond
-             ((region-active-p)
-              (let ((start (region-beginning))
-                    (end (region-end)))
-                (goto-char end)
-                (insert "#+END_" choice "\n")
-                (goto-char start)
-                (insert "#+BEGIN_" choice "\n")))
-             (t
-              (insert "#+BEGIN_" choice "\n")
-              (save-excursion (insert "#+END_" choice))))))))))
+  (let* ((extension (concat "." (or (plist-get ext-plist :html-extension)
+                                    org-html-extension
+                                    "html")))
+;; this is the code I've changed from the original function.
+         (file (org-export-output-file-name extension subtreep "/Users/jmay/tmp/"))
 
+         (org-export-coding-system org-html-coding-system))
+    (org-export-to-file 'html file
+      async subtreep visible-only body-only ext-plist)
+    (org-open-file file)))
 
-;; http://endlessparentheses.com/changing-the-org-mode-ellipsis.html
-(setq org-ellipsis "⤵")
+(org-defkey org-mode-map
+            (kbd "C-c 0") 'mwp-org-html-to-tmp)
+#+END_SRC
 
+** Disabled packages
+
+#+BEGIN_SRC elisp :tangle no
+(use-package dash-at-point) ;; links to dash
+(use-package motion-mode) ;; rubymotion
+(use-package deft)
+(use-package minimap)
+(use-package switch-window)
 #+END_SRC

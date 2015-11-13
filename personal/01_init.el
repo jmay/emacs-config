@@ -19,35 +19,35 @@
 (require 'use-package)
 
 ;; https://github.com/tarsius/auto-compile
-(setq load-prefer-newer t)
-(require 'auto-compile)
-(auto-compile-on-load-mode 1)
-(auto-compile-on-save-mode 1)
+;; (setq load-prefer-newer t)
+;; (require 'auto-compile)
+;; (auto-compile-on-load-mode 1)
+;; (auto-compile-on-save-mode 1)
 ;; (setq auto-compile-display-buffer nil)
 ;; (setq auto-compile-mode-line-counter t)
 
 ;; My packages
 
-(setq prelude-packages (append '(
-                                 auto-complete
-                                 dash-at-point
-                                 motion-mode
-                                 deft
-                                 minimap
-                                 ;; http://www.emacswiki.org/emacs/BrowseKillRing
-                                 browse-kill-ring
-                                 ;; yasnippet
-                                 ;; https://github.com/Bruce-Connor/smart-mode-line
-                                 smart-mode-line
-                                 ruby-refactor
-                                 ;; to get markdown options to appear in org-mode
-                                 easy-kill ;; https://github.com/leoliu/easy-kill
-                                 hlinum ;; highlight current line number
-;;                                 powerline ;; attractive mode line
-                                 highlight-indentation
-                                 ;; minitest
-                                 switch-window
-                                 ) prelude-packages))
+;; (setq prelude-packages (append '(
+;;                                  ;; auto-complete
+;;                                  ;; dash-at-point
+;;                                  ;; motion-mode
+;;                                  ;; deft
+;;                                  ;; minimap
+;;                                  ;; http://www.emacswiki.org/emacs/BrowseKillRing
+;;                                  ;; browse-kill-ring
+;;                                  ;; yasnippet
+;;                                  ;; https://github.com/Bruce-Connor/smart-mode-line
+;;                                  ;; smart-mode-line
+;;                                  ;; ruby-refactor
+;;                                  ;; to get markdown options to appear in org-mode
+;;                                  ;; easy-kill ;; https://github.com/leoliu/easy-kill
+;;                                  ;; hlinum ;; highlight current line number
+;; ;;                                 powerline ;; attractive mode line
+;;                                  ;; highlight-indentation
+;;                                  ;; minitest
+;;                                  ;; switch-window
+;;                                  ) prelude-packages))
 
 ;; (ido-vertical-mode 1)
 ;;(load "../helm-spotify/helm-spotify")
@@ -57,30 +57,30 @@
 ;; required to active the markdown export options in org-mode
 ;; rg(require 'ox-md)
 ;;(require 'Emmett-mode)
-(hlinum-activate)
+;; (hlinum-activate)
 
 ;; (require 'minitest)
 ;; (add-hook 'ruby-mode-hook 'minitest-mode)
 
 ;; Install my packages
-(prelude-install-packages)
+;; (prelude-install-packages)
 
 ;; (add-to-list 'package-archive-exclude-alist '(("melpa" org)))
 
-(setq prelude-guru nil)                 ; enable keyboard arrow keys for navigation
+;; (setq prelude-guru nil)                 ; enable keyboard arrow keys for navigation
 ;;(guru-global-mode +1)
 ;;(guru-mode +1)
 
-(setq whitespace-line-column 100)
+;; (setq whitespace-line-column 100)
 
 ;; activate the smart mode line
 ;;(if after-init-time (sml/setup)
 ;;  (add-hook 'after-init-hook 'sml/setup))
 
-;; use markdown-mode for .txt files
-(add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
-;; j2-mode for .es6 files
-(add-to-list 'auto-mode-alist '("\\.es6\\'" . js2-mode))
+;; ;; use markdown-mode for .txt files
+;; (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
+;; ;; j2-mode for .es6 files
+;; (add-to-list 'auto-mode-alist '("\\.es6\\'" . js2-mode))
 
 ;; TODO additional packages to consider
 ;; http://sachachua.com/blog/2011/12/emacs-artbollocks-mode-el-and-writing-more-clearly/
@@ -92,12 +92,12 @@
 ;;(setq prelude-flyspell t)
 
 
-;; http://emacsredux.com/blog/2013/05/18/instant-access-to-init-dot-el/
-(defun find-user-init-file ()
-  "Edit the `user-init-file', in another window."
-  (interactive)
-  (find-file-other-window user-init-file))
-(global-set-key (kbd "C-c I") 'find-user-init-file)
+;; ;; http://emacsredux.com/blog/2013/05/18/instant-access-to-init-dot-el/
+;; (defun find-user-init-file ()
+;;   "Edit the `user-init-file', in another window."
+;;   (interactive)
+;;   (find-file-other-window user-init-file))
+;; (global-set-key (kbd "C-c I") 'find-user-init-file)
 
 
 ;; (require 'edit-server)
@@ -105,12 +105,12 @@
 
 ;; default value of 'midnight-hook is 'clean-buffer-list
 ;; I do not want emacs to close all my buffers every night
-(remove-hook 'midnight-hook 'clean-buffer-list)
+;; (remove-hook 'midnight-hook 'clean-buffer-list)
 
-(custom-set-variables
- '(js2-basic-offset 2)
- '(js2-bounce-indent-p t)
- )
+;; (custom-set-variables
+;;  '(js2-basic-offset 2)
+;;  '(js2-bounce-indent-p t)
+;;  )
 
 ;; https://github.com/rranelli/emacs-dotfiles/blob/master/lisp/init-bootstrap.el
 
@@ -135,7 +135,7 @@
 
 ;; (jwm-safe-load-init-files)
 
-;; emacs should ask before carrying out C-x C-c
-(defvar confirm-kill-emacs 'yes-or-no-p)
+;; ;; emacs should ask before carrying out C-x C-c
+;; (defvar confirm-kill-emacs 'yes-or-no-p)
 
 ;;; my _init.el ends here
