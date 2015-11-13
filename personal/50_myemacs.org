@@ -326,7 +326,9 @@ When there is a text selection, act on the region."
             (toggle-truncate-lines t)))
 #+END_SRC
 
-** COMMENT All my org-mode stuff
+** All my org-mode stuff
+
+- [[http://doc.norang.ca/org-mode.html][Org Mode - Organize Your Life In Plain Text!]]
 
 #+BEGIN_SRC elisp
   ;; configuration for org mode, todo & journal capture
@@ -559,7 +561,7 @@ When there is a text selection, act on the region."
 
 #+END_SRC
 
-** org mode stuff
+*** evaluate & improve these
 
 - [[http://matt.hackinghistory.ca/2015/07/11/temporary-exporting/][EXPORTING ORG-FILES TO A TEMPORARY LOCATION]] (Matt Price)
 
@@ -621,4 +623,35 @@ Return output file's name."
 (use-package deft)
 (use-package minimap)
 (use-package switch-window)
+#+END_SRC
+
+** Under consideration
+
+*** TODO [[http://matt.hackinghistory.ca/2015/11/11/note-taking-with-pdf-tools/][NOTE TAKING WITH PDF TOOLS]]
+
+*** this might all be superseded by use-package
+
+#+BEGIN_SRC elisp :tangle no
+;; https://github.com/rranelli/emacs-dotfiles/blob/master/lisp/init-bootstrap.el
+
+(setq jwm-initialization-errors ())
+
+(defun jwm-safe-require (feature)
+  "Safely requires FEATURE."
+  (condition-case ex
+      (require feature)
+    ('error (add-to-list 'jwm-initialization-errors
+			 (format "[ERROR LOADING \"%s\"]: %s" (symbol-name feature) ex)))))
+
+(defun jwm-safe-load (file)
+  "Safely loads FILE."
+  (condition-case ex
+      (load file)
+    ('error (add-to-list 'jwm-initialization-errors
+			 (format "[ERROR LOADING \"%s\"]: %s" file ex)))))
+
+(defun jwm-safe-load-init-files ()
+  (mapc 'jwm-safe-load (directory-files "./pieces" 't "^[^#]*.el$")))
+
+;; (jwm-safe-load-init-files)
 #+END_SRC
