@@ -10,14 +10,15 @@ Some references:
 - [[https://github.com/sachac/.emacs.d][Sacha Chua's emacs.d]]
 - [[http://sachachua.com/blog/2014/12/emacs-configuration-use-package/][Sacha explains use-package]]
 - [[http://www.lunaryorn.com/2015/01/06/my-emacs-configuration-with-use-package.html][Sebastian Wiesner's configuration with use-package]]
+- [[http://doc.rix.si/cce/cce.html][Ryan Rix's Complete Computing Environment]]
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
 (require 'use-package)
 #+END_SRC
 
 ** General settings
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
 (require 'use-package)
 
 ;; emacs should ask before carrying out C-x C-c
@@ -38,11 +39,28 @@ Some references:
       (auto-compile-on-load-mode 1)
       (auto-compile-on-save-mode 1)
     ))
+
+(use-package which-key
+  :ensure t
+  :config
+    (which-key-mode)
+)
+#+END_SRC
+
+** Personal Information
+
+#+BEGIN_SRC emacs-lisp
+(setq user-full-name "Jason W. May"
+      user-mail-address "jmay@pobox.com")
 #+END_SRC
 
 ** Markdown editing & preview
 
-#+BEGIN_SRC elisp :results silent
+Use markdown-mode for =.txt= files
+
+#+BEGIN_SRC emacs-lisp :results silent
+(add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
+
 (defun markdown-preview-file ()
   "Run Marked on the current file and revert the buffer"
   (interactive)
@@ -52,25 +70,12 @@ Some references:
   )
 #+END_SRC
 
-** Software Development
+** Editing
 
-*** minor modes
+Always highlight the current line. =hlinum= is line highlighting, not
+line numbering.
 
-#+BEGIN_SRC elisp
-  ;; show fill column
-  (add-hook 'prog-mode-hook 'fci-mode)
-
-  ;; show line numbers
-  (setq linum-format "%4d ")
-  (add-hook 'prog-mode-hook 'linum-mode)
-  ;; scss-mode (for CSS, SASS) is not derived from prog-mode
-  (add-hook 'scss-mode-hook 'linum-mode)
-
-  ;; use markdown-mode for .txt files
-  (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
-  ;; j2-mode for .es6 files
-  (add-to-list 'auto-mode-alist '("\\.es6\\'" . js2-mode))
-
+#+BEGIN_SRC emacs-lisp
   (use-package hlinum
     :ensure t
     :config
@@ -78,12 +83,39 @@ Some references:
     )
 #+END_SRC
 
+** Software Development
+
+In coding buffers, I like to see:
+
+- the fill column indicator
+- text highlighted when it extends past the fill column
+- line numbers in the fringe.
+- when commenting regions, blank lines /should/ get comment markers
+
+#+BEGIN_SRC emacs-lisp
+  (defun my-coding-settings ()
+    "Show fill column indications and line numbers"
+    (fci-mode)
+    (setq linum-format "%4d ")
+    (linum-mode)
+    (setq whitespace-line-column 70)
+    (setq comment-empty-lines t)
+  )
+
+  (add-hook 'prog-mode-hook 'my-coding-settings)
+  ;; scss-mode (for CSS, SASS) is not derived from prog-mode
+  (add-hook 'scss-mode-hook 'my-coding-settings)
+#+END_SRC
+
+Use js2-mode for =.es6= files
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.es6\\'" . js2-mode))
+#+END_SRC
+
 *** development settings
 
-#+BEGIN_SRC elisp
-(setq whitespace-line-column 100)
-
-(setq comment-empty-lines t)
+#+BEGIN_SRC emacs-lisp
 
 (defun align-to-equals (begin end)
   "Align region to equal signs"
@@ -129,7 +161,7 @@ This functions should be added to the hooks of major modes for programming."
 
 Toggle ruby hash syntax between classic and 1.9 styles.
 
-#+BEGIN_SRC elisp :results silent
+#+BEGIN_SRC emacs-lisp :results silent
   (use-package ruby-hash-syntax
     :ensure t
   )
@@ -143,7 +175,7 @@ Toggle ruby hash syntax between classic and 1.9 styles.
 - whitespace-mode (diminished to ws): reveals loose whitespace
 - projectile-rails-mode
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
 (use-package ruby-refactor
   :ensure t
   :config
@@ -169,7 +201,7 @@ Then switch to the process buffer."
 Emacs has no indentation built in for SQL. This seems to be a rough
 start. Also see this: [[http://stackoverflow.com/questions/24397274/writing-php-with-sql-queries-in-emacs/24659949#24659949][sql-indent-string]]
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
 (use-package sql-indent
   :ensure t
 )
@@ -179,7 +211,7 @@ start. Also see this: [[http://stackoverflow.com/questions/24397274/writing-php-
 
 Lucas Bonnet's buffer-move package.
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
   (use-package buffer-move
     :ensure t
     :bind (
@@ -195,7 +227,7 @@ Lucas Bonnet's buffer-move package.
 
 Upcasing a region
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
 (defun upcase-region-or-word (numwords)
   "Upcase a region if selected, otherwise the next word (or words if prefix argument is provided)."
   (interactive "p")
@@ -206,7 +238,7 @@ Upcasing a region
 
 Commenting code
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
 (defun comment-or-uncomment-region-or-line ()
   "Comments or uncomments the region or the current line if there's no active region."
   (interactive)
@@ -224,7 +256,7 @@ Commenting code
 - [[https://emacs.stackexchange.com/questions/1051/copy-region-from-emacs-without-newlines][my stackexchange post]]
 - [[https://gist.github.com/xahlee/d364cbbff9b3abd12d29][improved version from Xah Lee]]
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
 (defun compact-uncompact-block ()
   "Remove or add line ending chars on current paragraph.
 This command is similar to a toggle of `fill-paragraph'.
@@ -277,7 +309,7 @@ When there is a text selection, act on the region."
 
 ** Highlight indentation columns in code
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
   (use-package highlight-indentation
     :ensure t
     :config
@@ -297,7 +329,7 @@ When there is a text selection, act on the region."
 
 - [[https://truongtx.me/2014/08/23/setup-emacs-as-an-sql-database-client/][setting up emacs as a SQL client]]
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
 (setq sql-connection-alist
       '((schoolistry (sql-product 'postgres)
                      (sql-port 5432)
@@ -326,239 +358,225 @@ When there is a text selection, act on the region."
             (toggle-truncate-lines t)))
 #+END_SRC
 
-** All my org-mode stuff
+** Org-mode settings, TODO management, journal capture
 
 - [[http://doc.norang.ca/org-mode.html][Org Mode - Organize Your Life In Plain Text!]]
+- https://www.gnu.org/software/emacs/manual/html_node/org/Template-expansion.html
+- http://members.optusnet.com.au/~charles57/GTD/datetree.html
+- https://www.gnu.org/software/emacs/manual/html_node/org/Conflicts.html
 
-#+BEGIN_SRC elisp
-  ;; configuration for org mode, todo & journal capture
-  ;;
-  ;; Reference:
-  ;;
-  ;; https://www.gnu.org/software/emacs/manual/html_node/org/Template-expansion.html
-  ;; http://members.optusnet.com.au/~charles57/GTD/datetree.html
-  ;; https://www.gnu.org/software/emacs/manual/html_node/org/Conflicts.html
-
-  (setq org-export-with-smart-quotes t)
-
-  ;; Make windmove work in org-mode:
-  (add-hook 'org-shiftup-final-hook 'windmove-up)
-  (add-hook 'org-shiftleft-final-hook 'windmove-left)
-  (add-hook 'org-shiftdown-final-hook 'windmove-down)
-  (add-hook 'org-shiftright-final-hook 'windmove-right)
-
-  ;; (setq org-default-notes-file "~/.deft/notes.org")
-
-  ;; force UTF-8
-  (setq org-export-coding-system 'utf-8)
-
-  (setq org-capture-templates
-        '(
-          ("t"
-           "TODO"
-           entry
-           (file+headline "~/.deft/gtd.org" "Tasks")
-           "* TODO %?\n  %i\n  %a")
-          ("o"
-           "Otherbase TODO"
-           entry
-           (file+headline "~/.deft/otherbase-todo.org" "Tasks")
-           "* TODO %?\n  %i\n")
-          ("v"
-           "Veriphyr TODO"
-           entry
-           (file+headline "~/.deft/veriphyr-todo.org" "Tasks")
-           "* TODO %?\n  %i\n")
-          ("e"
-           "Emacs TODO"
-           entry
-           (file+headline "~/.deft/emacs-todo.org" "Emacs TODO")
-           "* TODO %?\n  %i\n")
-          ("j"
-           "Journal"
-           entry
-           (file+datetree "~/.deft/journal.org")
-           "* %?\n%i\n")
-          ("s"
-           "Schoolistry Journal"
-           entry
-           (file+datetree "~/.deft/journal.org")
-           "* %? :schoolistry:\n%i\n")
-          )
-        )
-
-  ;; using deft with org-mode
-
-  ;; (when (require 'deft nil 'noerror)
-  ;;   (setq
-  ;; ;;   deft-extension "org"
-  ;;    deft-directory "~/.deft"
-  ;;    deft-text-mode 'org-mode
-  ;;    deft-auto-save-interval 0
-  ;;   )
-  ;;   (global-set-key (kbd "<f9>") 'deft))
-
-  ;; 130718 currently I don't like the deft auto-save because it triggers whitespace-cleanup
-  ;; couldn't turn it off once Deft has been loaded, needed to do this:
-  ;; (cancel-function-timers 'deft-auto-save)
-
-  ;; http://www.emacswiki.org/emacs/AutoFillMode
-  (add-hook 'text-mode-hook 'turn-on-auto-fill)
-  (add-hook 'org-mode-hook 'turn-on-auto-fill)
-  (add-hook 'markdown-mode-hook 'turn-on-auto-fill)
-
-  ;; for MobileOrg
-  (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
-  (setq org-directory "~/Dropbox/Apps/MobileOrg")
-
-
-  (defun my-org-export-change-options (plist backend)
-    (cond
-     ((equal backend 'html)
-      (plist-put plist :with-toc nil)
-      (plist-put plist :section-numbers t))
-     ((equal backend 'md)
-      (plist-put plist :with-toc nil)
-      (plist-put plist :section-numbers nil)))
-    plist)
-
-  ;; (add-to-list 'org-export-filter-options-functions 'my-org-export-change-options)
-
-
-  ;; idea for how to completely conceal/reveal the PROPERTIES blocks
-  ;; https://stackoverflow.com/questions/17478260/completely-hide-the-properties-drawer-in-org-mode
-  ;; (defun lawlist-org-cycle-hide-drawers (state)
-  ;;   "Re-hide all drawers after a visibility state change."
-  ;;   (when (and (derived-mode-p 'org-mode)
-  ;;        (not (memq state '(overview folded contents))))
-  ;;     (save-excursion
-  ;;       (let* ((globalp (memq state '(contents all)))
-  ;;              (beg (if globalp (point-min) (point)))
-  ;;              (end (if globalp (point-max)
-  ;;         (if (eq state 'children)
-  ;;       (save-excursion (outline-next-heading) (point))
-  ;;           (org-end-of-subtree t)))))
-  ;;   (goto-char beg)
-  ;;   (while (re-search-forward "^.*DEADLINE:.*$\\|^\\*\\* Someday.*$\\|^\\*\\* None.*$\\|^\\*\\* Planning.*$\\|^\\* TASKS.*$" end t)
-  ;;      (save-excursion
-  ;;     (beginning-of-line 1)
-  ;;     (when (looking-at "^.*DEADLINE:.*$\\|^\\*\\* Someday.*$\\|^\\*\\* None.*$\\|^\\*\\* Planning.*$\\|^\\* TASKS.*$")
-  ;;       (let ((b (match-end 0)))
-  ;;   (if (re-search-forward
-  ;;        "^[ \t]*:END:"
-  ;;        (save-excursion (outline-next-heading) (point)) t)
-  ;;       (outline-flag-region b (point-at-eol) t)
-  ;;     (user-error ":END: line missing at position %s" b))))))))))
+#+BEGIN_SRC emacs-lisp
+  ;; when opening org files, don't hide anything and use pretty indentation
+  (setq org-startup-folded 'showeverything)
+  (setq org-startup-indented t)
 
   ;; fontify code in code blocks
   (setq org-src-fontify-natively t)
 
-  (use-package org-bullets
-    :ensure t
-    :config
-    (progn
-      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-      )
-    )
-
-
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; install sql (includes postgresql) support for org-babel
-  ;; http://orgmode.org/worg/org-contrib/babel/languages/ob-doc-sql.html
-  ;; active Babel languages
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((sql . t)
-     (sh . t)
-     (python . t)))
-  ;; add additional languages with '((language . t)))
-
-  (defun babel-confirm (flag)
-    "Report the setting of org-confirm-babel-evaluate.
-  If invoked with C-u, toggle the setting"
-    (interactive "P")
-    (if (equal flag '(4))
-        (setq org-confirm-babel-evaluate (not org-confirm-babel-evaluate)))
-    (message "Babel evaluation confirmation is %s"
-             (if org-confirm-babel-evaluate "on" "off")))
-
-  ;; (org-add-link-type
-  ;;  "yt"
-  ;;  (lambda (handle)
-  ;;    (browse-url (concat "https://www.youtube.com/embed/" handle)))
-  ;;  (lambda (path desc backend)
-  ;;    (cl-case backend
-  ;;      ;; You may want to change your width and height.
-  ;;      (html (format "<iframe width=\"440\" height=\"335\" src=\"https://www.youtube.com/embed/%s\" frameborder=\"0\" allowfullscreen>%s</iframe>"
-  ;;                    path (or desc "")))
-  ;;      (latex (format "\href{%s}{%s}" path (or desc "video"))))))
-
-  (use-package org-download
-    :ensure t)
-
-  ;; Turn off ispell checking inside org mode source blocks
-  ;; NOT WORKING ON 150824
-  ;; http://endlessparentheses.com/ispell-and-org-mode.html
-  ;; (defun endless/org-ispell ()
-  ;;   "Configure `ispell-skip-region-alist' for `org-mode'."
-  ;;   (make-local-variable 'ispell-skip-region-alist)
-  ;;   (add-to-list 'ispell-skip-region-alist '(org-property-drawer-re))
-  ;;   (add-to-list 'ispell-skip-region-alist '("~" "~"))
-  ;;   (add-to-list 'ispell-skip-region-alist '("=" "="))
-  ;;   (add-to-list 'ispell-skip-region-alist '("^#\\+BEGIN_SRC" . "^#\\+END_SRC")))
-  ;; (add-hook 'org-mode-hook #'endless/org-ispell)
-
+  ;; include everything up to level 4 in the options offered for C-c i
   (setq org-imenu-depth 4)
-
-
-  ;; http://pragmaticemacs.com/emacs/wrap-text-in-an-org-mode-block/
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; function to wrap blocks of text in org templates                       ;;
-  ;; e.g. latex or src etc                                                  ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (defun org-begin-template ()
-    "Make a template at point."
-    (interactive)
-    (if (org-at-table-p)
-        (call-interactively 'org-table-rotate-recalc-marks)
-      (let* ((choices '(("s" . "SRC")
-                        ("e" . "EXAMPLE")
-                        ("q" . "QUOTE")
-                        ("v" . "VERSE")
-                        ("c" . "CENTER")
-                        ("l" . "LaTeX")
-                        ("h" . "HTML")
-                        ("a" . "ASCII")))
-             (key
-              (key-description
-               (vector
-                (read-key
-                 (concat (propertize "Template type: " 'face 'minibuffer-prompt)
-                         (mapconcat (lambda (choice)
-                                      (concat (propertize (car choice) 'face 'font-lock-type-face)
-                                              ": "
-                                              (cdr choice)))
-                                    choices
-                                    ", ")))))))
-        (let ((result (assoc key choices)))
-          (when result
-            (let ((choice (cdr result)))
-              (cond
-               ((region-active-p)
-                (let ((start (region-beginning))
-                      (end (region-end)))
-                  (goto-char end)
-                  (insert "#+END_" choice "\n")
-                  (goto-char start)
-                  (insert "#+BEGIN_" choice "\n")))
-               (t
-                (insert "#+BEGIN_" choice "\n")
-                (save-excursion (insert "#+END_" choice))))))))))
-
 
   ;; http://endlessparentheses.com/changing-the-org-mode-ellipsis.html
   (setq org-ellipsis "⤵")
 
+  ;; no prompting on C-c C-c execution in source blocks
+  (setq org-confirm-babel-evaluate nil)
+
+  ;; exporting (to HTML)
+    (setq org-export-with-smart-quotes t)
+    ;; force UTF-8
+    (setq org-export-coding-system 'utf-8)
+
+    (defun my-org-export-change-options (plist backend)
+      (cond
+       ((equal backend 'html)
+        (plist-put plist :with-toc nil)
+        (plist-put plist :section-numbers t))
+       ((equal backend 'md)
+        (plist-put plist :with-toc nil)
+        (plist-put plist :section-numbers nil)))
+      plist)
+
+    ;; (add-to-list 'org-export-filter-options-functions 'my-org-export-change-options)
+
+
+    ;; Make windmove work in org-mode:
+    (add-hook 'org-shiftup-final-hook 'windmove-up)
+    (add-hook 'org-shiftleft-final-hook 'windmove-left)
+    (add-hook 'org-shiftdown-final-hook 'windmove-down)
+    (add-hook 'org-shiftright-final-hook 'windmove-right)
+
+    (setq org-capture-templates
+          '(
+            ("t"
+             "TODO"
+             entry
+             (file+headline "~/.deft/gtd.org" "Tasks")
+             "* TODO %?\n  %i\n  %a")
+            ("o"
+             "Otherbase TODO"
+             entry
+             (file+headline "~/.deft/otherbase-todo.org" "Tasks")
+             "* TODO %?\n  %i\n")
+            ("v"
+             "Veriphyr TODO"
+             entry
+             (file+headline "~/.deft/veriphyr-todo.org" "Tasks")
+             "* TODO %?\n  %i\n")
+            ("e"
+             "Emacs TODO"
+             entry
+             (file+headline "~/.deft/emacs-todo.org" "Emacs TODO")
+             "* TODO %?\n  %i\n")
+            ("j"
+             "Journal"
+             entry
+             (file+datetree "~/.deft/journal.org")
+             "* %?\n%i\n")
+            ("s"
+             "Schoolistry Journal"
+             entry
+             (file+datetree "~/.deft/journal.org")
+             "* %? :schoolistry:\n%i\n")
+            )
+          )
+
+    ;; http://www.emacswiki.org/emacs/AutoFillMode
+    (add-hook 'text-mode-hook 'turn-on-auto-fill)
+    (add-hook 'org-mode-hook 'turn-on-auto-fill)
+    (add-hook 'markdown-mode-hook 'turn-on-auto-fill)
+
+    ;; for MobileOrg
+    (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
+    (setq org-directory "~/Dropbox/Apps/MobileOrg")
+
+    ;; idea for how to completely conceal/reveal the PROPERTIES blocks
+    ;; https://stackoverflow.com/questions/17478260/completely-hide-the-properties-drawer-in-org-mode
+    ;; (defun lawlist-org-cycle-hide-drawers (state)
+    ;;   "Re-hide all drawers after a visibility state change."
+    ;;   (when (and (derived-mode-p 'org-mode)
+    ;;        (not (memq state '(overview folded contents))))
+    ;;     (save-excursion
+    ;;       (let* ((globalp (memq state '(contents all)))
+    ;;              (beg (if globalp (point-min) (point)))
+    ;;              (end (if globalp (point-max)
+    ;;         (if (eq state 'children)
+    ;;       (save-excursion (outline-next-heading) (point))
+    ;;           (org-end-of-subtree t)))))
+    ;;   (goto-char beg)
+    ;;   (while (re-search-forward "^.*DEADLINE:.*$\\|^\\*\\* Someday.*$\\|^\\*\\* None.*$\\|^\\*\\* Planning.*$\\|^\\* TASKS.*$" end t)
+    ;;      (save-excursion
+    ;;     (beginning-of-line 1)
+    ;;     (when (looking-at "^.*DEADLINE:.*$\\|^\\*\\* Someday.*$\\|^\\*\\* None.*$\\|^\\*\\* Planning.*$\\|^\\* TASKS.*$")
+    ;;       (let ((b (match-end 0)))
+    ;;   (if (re-search-forward
+    ;;        "^[ \t]*:END:"
+    ;;        (save-excursion (outline-next-heading) (point)) t)
+    ;;       (outline-flag-region b (point-at-eol) t)
+    ;;     (user-error ":END: line missing at position %s" b))))))))))
+
+    (use-package org-bullets
+      :ensure t
+      :config
+      (progn
+        (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+        )
+      )
+
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; install sql (includes postgresql) support for org-babel
+    ;; http://orgmode.org/worg/org-contrib/babel/languages/ob-doc-sql.html
+    ;; active Babel languages
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((sql . t)
+       (sh . t)
+       (python . t)))
+    ;; add additional languages with '((language . t)))
+
+    (defun babel-confirm (flag)
+      "Report the setting of org-confirm-babel-evaluate.
+    If invoked with C-u, toggle the setting"
+      (interactive "P")
+      (if (equal flag '(4))
+          (setq org-confirm-babel-evaluate (not org-confirm-babel-evaluate)))
+      (message "Babel evaluation confirmation is %s"
+               (if org-confirm-babel-evaluate "on" "off")))
+
+    ;; (org-add-link-type
+    ;;  "yt"
+    ;;  (lambda (handle)
+    ;;    (browse-url (concat "https://www.youtube.com/embed/" handle)))
+    ;;  (lambda (path desc backend)
+    ;;    (cl-case backend
+    ;;      ;; You may want to change your width and height.
+    ;;      (html (format "<iframe width=\"440\" height=\"335\" src=\"https://www.youtube.com/embed/%s\" frameborder=\"0\" allowfullscreen>%s</iframe>"
+    ;;                    path (or desc "")))
+    ;;      (latex (format "\href{%s}{%s}" path (or desc "video"))))))
+
+    (use-package org-download
+      :ensure t)
+
+    ;; Turn off ispell checking inside org mode source blocks
+    ;; NOT WORKING ON 150824
+    ;; http://endlessparentheses.com/ispell-and-org-mode.html
+    ;; (defun endless/org-ispell ()
+    ;;   "Configure `ispell-skip-region-alist' for `org-mode'."
+    ;;   (make-local-variable 'ispell-skip-region-alist)
+    ;;   (add-to-list 'ispell-skip-region-alist '(org-property-drawer-re))
+    ;;   (add-to-list 'ispell-skip-region-alist '("~" "~"))
+    ;;   (add-to-list 'ispell-skip-region-alist '("=" "="))
+    ;;   (add-to-list 'ispell-skip-region-alist '("^#\\+BEGIN_SRC" . "^#\\+END_SRC")))
+    ;; (add-hook 'org-mode-hook #'endless/org-ispell)
+
+
+    ;; http://pragmaticemacs.com/emacs/wrap-text-in-an-org-mode-block/
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; function to wrap blocks of text in org templates                       ;;
+    ;; e.g. latex or src etc                                                  ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    (defun org-begin-template ()
+      "Make a template at point."
+      (interactive)
+      (if (org-at-table-p)
+          (call-interactively 'org-table-rotate-recalc-marks)
+        (let* ((choices '(("s" . "SRC")
+                          ("e" . "EXAMPLE")
+                          ("q" . "QUOTE")
+                          ("v" . "VERSE")
+                          ("c" . "CENTER")
+                          ("l" . "LaTeX")
+                          ("h" . "HTML")
+                          ("a" . "ASCII")))
+               (key
+                (key-description
+                 (vector
+                  (read-key
+                   (concat (propertize "Template type: " 'face 'minibuffer-prompt)
+                           (mapconcat (lambda (choice)
+                                        (concat (propertize (car choice) 'face 'font-lock-type-face)
+                                                ": "
+                                                (cdr choice)))
+                                      choices
+                                      ", ")))))))
+          (let ((result (assoc key choices)))
+            (when result
+              (let ((choice (cdr result)))
+                (cond
+                 ((region-active-p)
+                  (let ((start (region-beginning))
+                        (end (region-end)))
+                    (goto-char end)
+                    (insert "#+END_" choice "\n")
+                    (goto-char start)
+                    (insert "#+BEGIN_" choice "\n")))
+                 (t
+                  (insert "#+BEGIN_" choice "\n")
+                  (save-excursion (insert "#+END_" choice))))))))))
+
+  ;; (use-package org-protocol
+  ;; :ensure t)
 #+END_SRC
 
 *** evaluate & improve these
@@ -568,7 +586,7 @@ When there is a text selection, act on the region."
 This needs work. The path is hard-coded. And the highlight-indentation
 settings are somehow being transmitted through to the HTML export.
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
 ;; export html to tmp dir
 (defun mwp-org-html-to-tmp
     (&optional async subtreep visible-only body-only ext-plist)
@@ -617,16 +635,38 @@ Return output file's name."
 
 ** Theme
 
+#+BEGIN_SRC emacs-lisp
+;; (use-package color-theme-solarized :ensure t)
+;; (color-theme-solarized-dark)
+(color-theme-wheat)
+#+END_SRC
 I prefer a larger font to the default.
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
 (setq default-frame-alist '((font . "Source Code Pro-14")))
 #+END_SRC
 
-This is my old personal theme. Probably want to nuke this and go with
-a standard theme.
+[[https://github.com/TheBB/spaceline/tree/master][Mode line theme from Spacemacs]]
 
-#+BEGIN_SRC elisp :tangle no
+#+BEGIN_SRC emacs-lisp
+(use-package spaceline
+  :ensure t
+  :config
+    (progn
+      (require 'spaceline-config)
+      (spaceline-spacemacs-theme)
+    )
+)
+
+;; prelude turns on rainbow; maybe I don't want it;
+;; Sacha thinks that it is slow
+;; (use-package rainbow-delimiters :disabled t)
+#+END_SRC
+
+DISABLED: This is my old personal theme. Probably want to nuke this
+and go with a standard theme.
+
+#+BEGIN_SRC emacs-lisp :tangle no
 (if (eq (window-system) 'ns)
     (progn
      (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
@@ -636,7 +676,7 @@ a standard theme.
 
 ** Disabled packages
 
-#+BEGIN_SRC elisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package dash-at-point) ;; links to dash
 (use-package motion-mode) ;; rubymotion
 (use-package deft)
@@ -649,7 +689,7 @@ a standard theme.
 Having problems with this: hanging when trying to transfer a link from
 Chrome.
 
-#+BEGIN_SRC elisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package org-mac-link
   :ensure t
   )
@@ -665,7 +705,7 @@ Chrome.
 
 *** this might all be superseded by use-package
 
-#+BEGIN_SRC elisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; https://github.com/rranelli/emacs-dotfiles/blob/master/lisp/init-bootstrap.el
 
 (setq jwm-initialization-errors ())
@@ -722,7 +762,7 @@ customize-group RET ns RET".
 - ns-right-control-modifier
 - ns-right-option-modifier
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
 (setq mac-command-modifier 'super)
 (setq mac-option-modifier 'hyper)
 (setq mac-right-command-modifier 'alt)
@@ -732,13 +772,13 @@ customize-group RET ns RET".
 
 Command-z is Undo; make sure that Command-Shift-z is Redo
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "s-Z") 'undo-tree-redo)
 #+END_SRC
 
 ** Navigation
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
 (global-set-key (read-kbd-macro "s-<down>") 'scroll-up-command)
 (global-set-key (read-kbd-macro "s-<up>") 'scroll-down-command)
 (global-set-key (read-kbd-macro "<next>") 'forward-paragraph)   ;; fn-down
@@ -795,6 +835,14 @@ Command-z is Undo; make sure that Command-Shift-z is Redo
              :bind
              (("M-z" . ace-jump-zap-up-to-char-dwim)
               ("C-M-z" . ace-jump-zap-to-char-dwim)))
+
+(use-package goto-chg
+  :ensure t
+  :config
+    (progn
+      (global-set-key (kbd "<H-up>") 'goto-last-change)
+      (global-set-key (kbd "<H-down>") 'goto-last-change-reverse)
+    ))
 #+END_SRC
 
 #+RESULTS:
@@ -807,7 +855,7 @@ Navigation hydras, from John Kitchin and others
 - [[http://kitchingroup.cheme.cmu.edu/blog/2015/09/28/A-cursor-goto-hydra-for-emacs][A cursor goto hydra for emacs]]
 - left & right-Command-G "goto" jumps to things
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
 (use-package hydra
   :ensure t
   :config
@@ -963,7 +1011,7 @@ _n_: Navigate           _._: mark position _/_: jump to mark
 
 right-command+w to select current word/sentence/para/etc for action
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "A-w") 'er/expand-region)
 
 (use-package multiple-cursors
@@ -985,7 +1033,7 @@ right-command+w to select current word/sentence/para/etc for action
 
 ** Programming
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-c \\") 'comment-or-uncomment-region-or-line)
   (global-set-key (kbd "C-c ;") 'comment-or-uncomment-region-or-line)
   (global-set-key (kbd "s-/") 'comment-or-uncomment-region-or-line)
@@ -994,10 +1042,16 @@ right-command+w to select current word/sentence/para/etc for action
 
   (global-set-key (kbd "M-u") 'upcase-region-or-word)
 
-  (global-set-key (kbd "C-c M-q") 'toggle-fill-unfill)
-
   (global-set-key (kbd "s-(") 'insert-parentheses)
   (global-set-key (kbd "s-9") 'insert-parentheses)
+
+(use-package unfill
+  :ensure t
+  :config
+  (progn
+    (global-set-key (kbd "C-c M-q") 'toggle-fill-unfill)
+    (global-set-key (kbd "M-q") 'toggle-fill-unfill)
+  ))
 
   ;; todo, notes, journal
   (global-set-key (kbd "C-c j") 'org-capture)
@@ -1053,7 +1107,7 @@ right-command+w to select current word/sentence/para/etc for action
 
 Navigation with key chords. I think I prefer the hydra approach.
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
 (key-chord-define-global "jj" nil) ;; disable this because I use jj in ruby
 ;; (key-chord-define-global "jw" 'ace-jump-word-mode)
 ;; (key-chord-define-global "yy" 'ace-jump-word-mode)
@@ -1075,14 +1129,27 @@ Navigation with key chords. I think I prefer the hydra approach.
   (define-key org-mode-map (kbd "C-c <") 'org-insert-today-date)
   )
 
+  ;; using deft with org-mode
 
+  ;; (when (require 'deft nil 'noerror)
+  ;;   (setq
+  ;; ;;   deft-extension "org"
+  ;;    deft-directory "~/.deft"
+  ;;    deft-text-mode 'org-mode
+  ;;    deft-auto-save-interval 0
+  ;;   )
+  ;;   (global-set-key (kbd "<f9>") 'deft))
+
+  ;; 130718 currently I don't like the deft auto-save because it triggers whitespace-cleanup
+  ;; couldn't turn it off once Deft has been loaded, needed to do this:
+  ;; (cancel-function-timers 'deft-auto-save)
 #+END_SRC
 
 
 Having lots of problems with Dash. Re-enable these when issues are
 resolved.
 
-#+BEGIN_SRC elisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle no
 (global-set-key (read-kbd-macro "C-c m") 'dash-at-point)
 (add-to-list 'dash-at-point-mode-alist '(perl-mode . "perl"))
 #+END_SRC
